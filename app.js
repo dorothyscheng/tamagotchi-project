@@ -14,17 +14,17 @@ class Tamagotchi {
     static player={};
 }
 
-// Age increases every 5 minutes
+// Age increases every 1 minute
 function updateAge() {
     const player=Tamagotchi.player;
     const ageText=$('#age-text');
     let  currentAge=player.age;
     Tamagotchi.player.ageInterval=setInterval(()=>{
-        Tamagotchi.player.age=currentAge++;
+        currentAge++;
+        Tamagotchi.player.age=currentAge;
         ageText.text(currentAge);
-    },300000);
+    },60000);
 };
-
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
     const player=Tamagotchi.player;
@@ -38,17 +38,6 @@ function updateHunger() {
         };
     };
 }
-
-// Hunger increases every 1.5 minutes
-function increaseHunger() {
-    const player=Tamagotchi.player;
-    let currentHunger=player.hunger;
-    Tamagotchi.player.hungerInterval=setInterval(()=>{
-        Tamagotchi.player.hunger=currentHunger++;
-        updateHunger();
-    },90000);
-}
-
 function updateSleepiness() {
     const $sleepyBars=$('#sleepy-bar-head').children();
     const player=Tamagotchi.player;
@@ -62,17 +51,6 @@ function updateSleepiness() {
         };
     };
 }
-
-// Sleepiness increases every 3 minutes
-function increaseSleepiness() {
-    const player=Tamagotchi.player;
-    let currentSleepiness=player.sleepiness;
-    Tamagotchi.player.sleepinessInterval=setInterval(()=>{
-        Tamagotchi.player.hunger=currentSleepiness++;
-        updateSleepiness();
-    },180000);
-}
-
 function updateBoredom() {
     const $boredBars=$('#bored-bar-head').children();
     const player=Tamagotchi.player;
@@ -87,14 +65,33 @@ function updateBoredom() {
     };
 }
 
-// Boredom increases every 1 minute
+// INCREASE STATS
+function increaseHunger() {
+    const player=Tamagotchi.player;
+    let currentHunger=player.hunger;
+    Tamagotchi.player.hungerInterval=setInterval(()=>{
+        currentHunger++;
+        Tamagotchi.player.hunger=currentHunger;
+        updateHunger();
+    },5000);
+}
+function increaseSleepiness() {
+    const player=Tamagotchi.player;
+    let currentSleepiness=player.sleepiness;
+    Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+        currentSleepiness++;
+        Tamagotchi.player.sleepiness=currentSleepiness;
+        updateSleepiness();
+    },3000);
+}
 function increaseBoredom() {
     const player=Tamagotchi.player;
-    let currentBoredom=player.Boredom;
+    let currentBoredom=player.boredom;
     Tamagotchi.player.boredomInterval=setInterval(()=>{
-        Tamagotchi.player.boredom=currentBoredom++;
+        currentBoredom++;
+        Tamagotchi.player.boredom=currentBoredom;
         updateBoredom();
-    },60000);
+    },2000);
 }
 
 // PLAYER ACTIONS
@@ -108,6 +105,17 @@ function feedPet() {
     setTimeout(increaseHunger,5000);
 }
 
+function toggleLights() {
+    const $petSection=$('#pet-section');
+    const $lightsIndicator=$('#lights-indicator')
+    $petSection.toggleClass('lights-off');
+    if ($petSection.hasClass('lights-off')) {
+        $lightsIndicator.text('On');
+    } else {
+        $lightsIndicator.text('Off');
+    };
+};
+
 function startGame() {
     const player=Tamagotchi.player;
     $('#start-screen').fadeOut();
@@ -119,7 +127,10 @@ function startGame() {
     updateBoredom();
     updateAge();
     increaseHunger();
+    increaseBoredom();
+    increaseSleepiness();
     $('#feed-button').on('click',feedPet);
+    $('#lights-button').on('click',toggleLights);
 };
 
 function namePet(name) {
