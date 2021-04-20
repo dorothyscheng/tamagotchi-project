@@ -14,6 +14,7 @@ class Tamagotchi {
     static player={};
 }
 
+// UPDATE STAT DISPLAYS
 // Age increases every 1 minute
 function updateAge() {
     const player=Tamagotchi.player;
@@ -65,7 +66,8 @@ function updateBoredom() {
     };
 }
 
-// INCREASE STATS
+// INCREMENT STATS
+// Hunger increases every 30 seconds
 function increaseHunger() {
     const player=Tamagotchi.player;
     let currentHunger=player.hunger;
@@ -73,8 +75,9 @@ function increaseHunger() {
         currentHunger++;
         Tamagotchi.player.hunger=currentHunger;
         updateHunger();
-    },5000);
+    },30000);
 }
+// Sleepiness increases every 5 seconds
 function increaseSleepiness() {
     const player=Tamagotchi.player;
     let currentSleepiness=player.sleepiness;
@@ -82,8 +85,9 @@ function increaseSleepiness() {
         currentSleepiness++;
         Tamagotchi.player.sleepiness=currentSleepiness;
         updateSleepiness();
-    },3000);
+    },5000);
 }
+// Boredom increases every 20 seconds
 function increaseBoredom() {
     const player=Tamagotchi.player;
     let currentBoredom=player.boredom;
@@ -91,7 +95,7 @@ function increaseBoredom() {
         currentBoredom++;
         Tamagotchi.player.boredom=currentBoredom;
         updateBoredom();
-    },2000);
+    },20000);
 }
 
 // PLAYER ACTIONS
@@ -102,19 +106,36 @@ function feedPet() {
     currentHunger--;
     Tamagotchi.player.hunger=currentHunger;
     updateHunger();
-    setTimeout(increaseHunger,5000);
+    setTimeout(increaseHunger,30000);
 }
-
 function toggleLights() {
     const $petSection=$('#pet-section');
     const $lightsIndicator=$('#lights-indicator')
     $petSection.toggleClass('lights-off');
     if ($petSection.hasClass('lights-off')) {
         $lightsIndicator.text('On');
+        sleep();
     } else {
         $lightsIndicator.text('Off');
+        $('#feed-button').on('click',feedPet);
+        // $('#play-button').off();
+        clearInterval(Tamagotchi.player.sleepinessInterval);
+        setTimeout(increaseSleepiness,5000);
     };
 };
+// Sleeping for 2 seconds subtracts 1 sleepiness
+function sleep() {
+    clearInterval(Tamagotchi.player.sleepinessInterval);
+    $('#feed-button').off();
+    $('#play-button').off();
+    const player=Tamagotchi.player;
+    Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+        let currentSleepiness=player.sleepiness;
+        currentSleepiness--;
+        Tamagotchi.player.sleepiness=currentSleepiness;
+        updateSleepiness();
+    },2000);
+}
 
 function startGame() {
     const player=Tamagotchi.player;
