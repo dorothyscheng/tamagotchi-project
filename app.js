@@ -14,6 +14,7 @@ class Tamagotchi {
     static player={};
 }
 
+// Age increases every 5 minutes
 function updateAge() {
     const player=Tamagotchi.player;
     const ageText=$('#age-text');
@@ -21,7 +22,7 @@ function updateAge() {
     Tamagotchi.player.ageInterval=setInterval(()=>{
         Tamagotchi.player.age=currentAge++;
         ageText.text(currentAge);
-    },60000);
+    },300000);
 };
 
 function updateHunger() {
@@ -38,6 +39,16 @@ function updateHunger() {
     };
 }
 
+// Hunger increases every 1.5 minutes
+function increaseHunger() {
+    const player=Tamagotchi.player;
+    let currentHunger=player.hunger;
+    Tamagotchi.player.hungerInterval=setInterval(()=>{
+        Tamagotchi.player.hunger=currentHunger++;
+        updateHunger();
+    },90000);
+}
+
 function updateSleepiness() {
     const $sleepyBars=$('#sleepy-bar-head').children();
     const player=Tamagotchi.player;
@@ -50,6 +61,16 @@ function updateSleepiness() {
             $currentBar.removeClass('filled');
         };
     };
+}
+
+// Sleepiness increases every 3 minutes
+function increaseSleepiness() {
+    const player=Tamagotchi.player;
+    let currentSleepiness=player.sleepiness;
+    Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+        Tamagotchi.player.hunger=currentSleepiness++;
+        updateSleepiness();
+    },180000);
 }
 
 function updateBoredom() {
@@ -66,6 +87,16 @@ function updateBoredom() {
     };
 }
 
+// Boredom increases every 1 minute
+function increaseBoredom() {
+    const player=Tamagotchi.player;
+    let currentBoredom=player.Boredom;
+    Tamagotchi.player.boredomInterval=setInterval(()=>{
+        Tamagotchi.player.boredom=currentBoredom++;
+        updateBoredom();
+    },60000);
+}
+
 function startGame() {
     const player=Tamagotchi.player;
     $('#start-screen').fadeOut();
@@ -76,6 +107,7 @@ function startGame() {
     updateSleepiness();
     updateBoredom();
     updateAge();
+    increaseHunger();
 };
 
 function namePet(name) {
