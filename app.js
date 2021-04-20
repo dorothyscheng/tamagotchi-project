@@ -78,7 +78,7 @@ function increaseHunger() {
         if (Tamagotchi.player.hunger>10) {
             endGame();
         };
-    },3000);
+    },30000);
 }
 // Sleepiness increases every 30 seconds
 function increaseSleepiness() {

@@ -112,10 +112,6 @@ body {
     font-size: 30px;
 }
 
-.filled {
-    background-color: #39ff14;
-}
-
 .status-div {
     display: flex;
     flex-direction: column;
@@ -148,17 +144,28 @@ body {
 .pet {
     width: 400px;
     height: 200px;
-    border-radius: 50%;
-    background-color: pink;
     margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-.lights-off {
-    z-index: 1;
-    opacity: .5;
-    background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhcnJ5JTIwc2t5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+.head {
+    display: flex;
+    flex-direction: column;
 }
 
+.pet-row {
+    display: flex;
+}
+
+.pet-cell {
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid white; */
+}
+
+
+/* ROCK PAPER SCISSORS */
 .rps-container {
     display: none;
     position: absolute;
@@ -239,10 +246,37 @@ body {
     margin-bottom: 30px;
 }
 
+.end-message {
+    text-align: center;
+}
+
+/* CLASSES THAT CHANGE */
 .reveal {
     opacity: 1;
 }
 
-.end-message {
-    text-align: center;
+.filled {
+    background-color: #39ff14;
+}
+
+.pet-fill {
+    background-color: black;
+}
+
+.foot-fill {
+    background-color: gray;
+}
+
+.tail-fill {
+    background-color: white;
+}
+
+.eye-fill {
+    background-color: #39ff14;
+}
+
+.lights-off {
+    z-index: 1;
+    opacity: .5;
+    background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhcnJ5JTIwc2t5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
 }
