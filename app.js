@@ -177,9 +177,11 @@ function playRPS() {
     const petChoice=options[Math.floor(Math.random()*options.length)];
     const $petChoiceImage=$('#pet-choice-image');
     const $petChoiceText=$('#pet-choice-text');
+    const $petChoiceHeader=$('#pet-choice-header');
     $petChoiceImage.attr('src',petChoice.src);
     $petChoiceImage.attr('alt',petChoice.object);
     $petChoiceText.text(petChoice.object);
+    $petChoiceHeader.text(`${Tamagotchi.player.name} picked:`);
     $('#rps-container').slideDown();
     $('.rps-image').on('click',resolveRPS);
 };
