@@ -62,9 +62,8 @@ body {
 }
 
 .egg-div {
-    width: 500px;
-    height: 500px;
-    background-color: black;
+    /* width: 500px; */
+    /* height: 500px; */
     margin-right: 100px;
     display: flex;
     flex-direction: column;
@@ -137,14 +136,18 @@ body {
 /* PET DIV */
 .pet-section {
     margin-top: 50px;
+    /* margin-left: 100px; */
     width: 100%;
     height: 400px;
+    /* display: flex;
+    justify-content: space-between; */
 }
 
 .pet {
     width: 400px;
     height: 200px;
     margin-bottom: 0;
+    margin-left: 100px;
     display: flex;
     flex-direction: column;
 }
@@ -164,6 +167,86 @@ body {
     /* border: 1px solid white; */
 }
 
+.pet-fill {
+    background-color: black;
+}
+
+.pet-left {
+    animation: pet-left 5s infinite;
+}
+
+.pet-right {
+    animation: pet-right 5s infinite;
+}
+
+@keyframes pet-left {
+    0% {
+        margin-left: 0;
+    }
+    50% {
+        margin-left: 2px
+    }
+    100% {
+        margin-left: 0;
+    }
+}
+
+@keyframes pet-right {
+    0% {
+        width: 20px
+    }
+    50% {
+        width: 23px
+    }
+    100% {
+        width: 20px;
+    }
+}
+
+.foot-fill {
+    background-color: gray;
+}
+
+.tail-fill {
+    background-color: white;
+    /* animation: tail 5s infinite; */
+}
+
+.tail-animate {
+    animation: tail 5s infinite;
+}
+
+@keyframes tail {
+    0% {
+        width: 20px;
+    }
+    50% {
+        width: 15px;
+    }
+    100% {
+        width: 20px;
+    }
+}
+
+.tail-top {
+    animation: tail-top 5s infinite;
+}
+
+@keyframes tail-top {
+    0% {
+        margin-left: 0;
+    }
+    50% {
+        margin-left: 5px;
+    }
+    100% {
+        margin-left: 0;
+    }
+}
+
+.eye-fill {
+    background-color: #39ff14;
+}
 
 /* ROCK PAPER SCISSORS */
 .rps-container {
@@ -257,22 +340,6 @@ body {
 }
 
 .filled {
-    background-color: #39ff14;
-}
-
-.pet-fill {
-    background-color: black;
-}
-
-.foot-fill {
-    background-color: gray;
-}
-
-.tail-fill {
-    background-color: white;
-}
-
-.eye-fill {
     background-color: #39ff14;
 }
 
