@@ -112,18 +112,26 @@ function toggleLights() {
         sleep();
     } else {
         $lightsIndicator.text('Off');
+        $('#feed-button').off();
+        $('#play-button').off();
         $('#feed-button').on('click',feedPet);
         $('#play-button').on('click',togglePlay);
         clearInterval(Tamagotchi.player.sleepinessInterval);
         setTimeout(increaseSleepiness,5000);
     };
 };
+function sleepMessage() {
+    $('#game-message').text(`${Tamagotchi.player.name} is trying to sleep!`);
+    updateGameMessage();
+}
 // Sleeping for 10 seconds subtracts 1 sleepiness
 function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
         $('#feed-button').off();
         $('#play-button').off();
+        $('#feed-button').on('click',sleepMessage);
+        $('#play-button').on('click',sleepMessage);
         Tamagotchi.player.sleepinessInterval=setInterval(()=>{
             Tamagotchi.player.sleepiness--;
             updateSleepiness();
