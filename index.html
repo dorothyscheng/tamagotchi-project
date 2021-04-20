@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./main.css">
+    <!-- JQUERY -->
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <!-- Main JS -->
+    <script src="./app.js" defer></script>
+    <title>Tamagotchi</title>
+</head>
+<body>
+    <header id="header" class="header">
+        <h1 id="title" class="title">Name Your Pet</h1>
+    </header>
+
+    <main class="main">
+    
+    <div id="start-screen" class="start-screen">
+        <div id="egg-div" class="egg-div">
+            <h3 id="color-title" class="color-title">Pick Your Color</h3>
+            <div id="egg-image" class="egg-image"></div>
+        </div>
+        <!-- <div id="form-div" class="form-div"> -->
+            <form id="start-form" class="start-form">
+                <input type="text" id="pet-name" class="pet-name" value="Pet Name">
+                <button id="submit-button" class="submit button">Submit</button>
+            </form>
+        <!-- </div> -->
+    </div>
+
+    <div id="play-screen" class="play-screen">
+        <div id="stats-div" class="stats-div">
+            <div id="age-div" class="age-div">
+                <h3 id="age-title" class="age-title">Age: 
+                <span id="age-text" class="age-text">1</span></h3>
+            </div>
+            <div id="hungry-div" class="status-div">
+                <h3 id="hungry-title" class="status-title">Hunger</h3>
+                <div id="hungry-bar-head" class="status-head">
+                    <div id="hungry0" class="bar"></div>
+                    <div id="hungry1" class="bar"></div>
+                    <div id="hungry2" class="bar"></div>
+                    <div id="hungry3" class="bar"></div>
+                    <div id="hungry4" class="bar"></div>
+                    <div id="hungry5" class="bar"></div>
+                    <div id="hungry6" class="bar"></div>
+                    <div id="hungry7" class="bar"></div>
+                    <div id="hungry8" class="bar"></div>
+                    <div id="hungry9" class="bar"></div>
+                </div>
+            </div>
+            <div id="sleepy-div" class="status-div">
+                <h3 id="sleepy-title" class="status-title">Sleepiness</h3>
+                <div id="sleepy-bar-head" class="status-head">
+                    <div id="sleepy0" class="bar"></div>
+                    <div id="sleepy1" class="bar"></div>
+                    <div id="sleepy2" class="bar"></div>
+                    <div id="sleepy3" class="bar"></div>
+                    <div id="sleepy4" class="bar"></div>
+                    <div id="sleepy5" class="bar"></div>
+                    <div id="sleepy6" class="bar"></div>
+                    <div id="sleepy7" class="bar"></div>
+                    <div id="sleepy8" class="bar"></div>
+                    <div id="sleepy9" class="bar"></div>
+                </div>
+            </div>
+            <div id="bored-div" class="status-div">
+                <h3 id="bored-title" class="status-title">Boredom</h3>
+                <div id="bored-bar-head" class="status-head">
+                    <div id="bored0" class="bar"></div>
+                    <div id="bored1" class="bar"></div>
+                    <div id="bored2" class="bar"></div>
+                    <div id="bored3" class="bar"></div>
+                    <div id="bored4" class="bar"></div>
+                    <div id="bored5" class="bar"></div>
+                    <div id="bored6" class="bar"></div>
+                    <div id="bored7" class="bar"></div>
+                    <div id="bored8" class="bar"></div>
+                    <div id="bored9" class="bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pet-div" class="pet-div">
+            <div id="pet" class="pet"></div>
+        </div>
+
+        <div class="action-div" id="action-div">
+            <button id="feed-button" class="food button">Feed Me</button>
+            <button id="lights-button" class="lights button">Lights <span id="lights-indicator">Off</span></button>
+            <button id="play-button" class="play button">Play with Me</button>
+        </div>
+    </div>
+
+
+    </main>
+    
+</body>
+</html>
