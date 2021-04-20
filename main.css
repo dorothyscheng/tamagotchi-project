@@ -167,7 +167,11 @@ body {
     /* border: 1px solid white; */
 }
 
-.pet-fill {
+.eye-fill {
+    background-color: #39ff14;
+}
+
+.pet-fill, .sleeping {
     background-color: black;
 }
 
@@ -242,10 +246,6 @@ body {
     100% {
         margin-left: 0;
     }
-}
-
-.eye-fill {
-    background-color: #39ff14;
 }
 
 /* ROCK PAPER SCISSORS */

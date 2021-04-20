@@ -120,6 +120,7 @@ function toggleLights() {
         sleep();
     } else {
         $lightsIndicator.text('Off');
+        $('.eye-fill').removeClass('sleeping');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',feedPet);
@@ -136,6 +137,7 @@ function sleepMessage() {
 function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
+        $('.eye-fill').addClass('sleeping');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',sleepMessage);
