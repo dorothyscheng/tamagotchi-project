@@ -2,31 +2,16 @@ class Tamagotchi {
     constructor(name) {
         this.name=name;
         this.age=1;
-        this.hunger=0;
-        this.sleepiness=0;
-        this.boredom=0;
+        this.hunger=4;
+        this.sleepiness=3;
+        this.boredom=2;
         Tamagotchi.player=this;
     }
     static player={};
 }
 
-function namePet(name) {
-    new Tamagotchi(name);
-    startGame();
-}
-
-function startGame() {
-    const player=Tamagotchi.player;
-    $('#start-screen').fadeOut();
-    $('#title').fadeOut();
-    $('#title').hide().text(player.name).fadeIn();
-    $('#play-screen').fadeIn();
-};
-
-function updateStats() {
+function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
-    const $sleepyBars=$('#sleepy-bar-head').children();
-    const $boredBars=$('#bored-bar-head').children();
     const player=Tamagotchi.player;
     for (let i=0; i<$hungryBars.length; i++) {
         const $currentBar=$hungryBars.eq(i);
@@ -37,6 +22,11 @@ function updateStats() {
             $currentBar.removeClass('filled');
         };
     };
+}
+
+function updateSleepiness() {
+    const $sleepyBars=$('#sleepy-bar-head').children();
+    const player=Tamagotchi.player;
     for (let i=0; i<$sleepyBars.length; i++) {
         const $currentBar=$sleepyBars.eq(i);
         const index=$currentBar.attr('id').charAt(6);
@@ -46,6 +36,11 @@ function updateStats() {
             $currentBar.removeClass('filled');
         };
     };
+}
+
+function updateBoredom() {
+    const $boredBars=$('#bored-bar-head').children();
+    const player=Tamagotchi.player;
     for (let i=0; i<$boredBars.length; i++) {
         const $currentBar=$boredBars.eq(i);
         const index=$currentBar.attr('id').charAt(5);
@@ -55,6 +50,22 @@ function updateStats() {
             $currentBar.removeClass('filled');
         };
     };
+}
+
+function startGame() {
+    const player=Tamagotchi.player;
+    $('#start-screen').fadeOut();
+    $('#title').fadeOut();
+    $('#title').hide().text(player.name).fadeIn();
+    $('#play-screen').fadeIn();
+    updateHunger();
+    updateSleepiness();
+    updateBoredom();
+};
+
+function namePet(name) {
+    new Tamagotchi(name);
+    startGame();
 }
 
 // EVENT LISTENERS
