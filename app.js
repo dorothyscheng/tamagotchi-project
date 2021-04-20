@@ -13,7 +13,6 @@ class Tamagotchi {
     }
     static player={};
 }
-
 // UPDATE STAT DISPLAYS
 // Age increases every 1 minute
 function updateAge() {
@@ -76,13 +75,19 @@ function increaseHunger() {
     Tamagotchi.player.hungerInterval=setInterval(()=>{
         Tamagotchi.player.hunger++;
         updateHunger();
-    },30000);
+        if (Tamagotchi.player.hunger>10) {
+            endGame();
+        };
+    },3000);
 }
 // Sleepiness increases every 30 seconds
 function increaseSleepiness() {
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         Tamagotchi.player.sleepiness++;
         updateSleepiness();
+        if (Tamagotchi.player.sleepiness>10) {
+            endGame();
+        };
     },30000);
 }
 // Boredom increases every 20 seconds
@@ -90,6 +95,9 @@ function increaseBoredom() {
     Tamagotchi.player.boredomInterval=setInterval(()=>{
         Tamagotchi.player.boredom++;
         updateBoredom();
+        if (Tamagotchi.player.boredom>10) {
+            endGame();
+        };
     },20000);
 }
 
@@ -229,21 +237,35 @@ function startGame() {
     $('#start-screen').fadeOut();
     $('#title').fadeOut();
     $('#title').hide().text(player.name).fadeIn();
-    $('#play-screen').fadeIn();
-    updateHunger();
-    updateSleepiness();
-    updateBoredom();
-    updateAge();
-    increaseHunger();
-    increaseBoredom();
-    increaseSleepiness();
-    $('#feed-button').on('click',feedPet);
-    $('#lights-button').on('click',toggleLights);
-    $('#play-button').on('click',togglePlay);
+    setTimeout(()=>{
+        $('#play-screen').fadeIn();
+        updateHunger();
+        updateSleepiness();
+        updateBoredom();
+        updateAge();
+        increaseHunger();
+        increaseBoredom();
+        increaseSleepiness();
+        $('#feed-button').on('click',feedPet);
+        $('#lights-button').on('click',toggleLights);
+        $('#play-button').on('click',togglePlay);
+    },1000);
 };
 function namePet(name) {
     new Tamagotchi(name);
     startGame();
+}
+function endGame() {
+    clearInterval(Tamagotchi.player.boredomInterval);
+    clearInterval(Tamagotchi.player.hungerInterval);
+    clearInterval(Tamagotchi.player.sleepinessInterval);
+    clearInterval(Tamagotchi.player.ageInterval);
+    $('#play-screen').fadeOut();
+    $('body').removeClass('animate-color');
+    $('#end-message').hide().text(`${Tamagotchi.player.name} died from neglect...`);
+    setTimeout(()=>{
+        $('#end-message').fadeIn();
+    },1000);
 }
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));

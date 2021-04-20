@@ -20,111 +20,109 @@
     <script src="./app.js" defer></script>
     <title>Tamagotchi</title>
 </head>
-<body>
+<body class="animate-color">
     <header id="header" class="header">
         <h1 id="title" class="title">Build Your Pet</h1>
     </header>
-
     <main class="main">
-    
-    <section id="start-screen" class="start-screen">
-        <div id="egg-div" class="egg-div">
-            <h3 id="color-title" class="color-title">placeholder for image</h3>
-            <div id="egg-image" class="egg-image"></div>
-        </div>
-        <form id="start-form" class="start-form">
-            <input type="text" id="pet-name" class="pet-name" value="Pet Name">
-            <button id="submit-button" class="submit button">Submit</button>
-        </form>
+        <section id="start-screen" class="start-screen">
+            <div id="egg-div" class="egg-div">
+                <h3 id="color-title" class="color-title">placeholder for image</h3>
+                <div id="egg-image" class="egg-image"></div>
+            </div>
+            <form id="start-form" class="start-form">
+                <input type="text" id="pet-name" class="pet-name" value="Pet Name">
+                <button id="submit-button" class="submit-button">Submit</button>
+            </form>
         </section>
-
-    <section id="play-screen" class="play-screen">
-        <section id="stats-section" class="stats-section">
-            <div id="age-div" class="age-div">
-                <h3 id="age-title" class="age-title">Age: 
-                <span id="age-text" class="age-text">1</span></h3>
-            </div>
-            <div id="hungry-div" class="status-div">
-                <h3 id="hungry-title" class="status-title">Hunger</h3>
-                <div id="hungry-bar-head" class="status-head">
-                    <div id="hungry0" class="bar"></div>
-                    <div id="hungry1" class="bar"></div>
-                    <div id="hungry2" class="bar"></div>
-                    <div id="hungry3" class="bar"></div>
-                    <div id="hungry4" class="bar"></div>
-                    <div id="hungry5" class="bar"></div>
-                    <div id="hungry6" class="bar"></div>
-                    <div id="hungry7" class="bar"></div>
-                    <div id="hungry8" class="bar"></div>
-                    <div id="hungry9" class="bar"></div>
+        <section id="play-screen" class="play-screen">
+            <section id="stats-section" class="stats-section">
+                <div id="age-div" class="age-div">
+                    <h3 id="age-title" class="age-title">Age: 
+                    <span id="age-text" class="age-text">1</span></h3>
                 </div>
-            </div>
-            <div id="sleepy-div" class="status-div">
-                <h3 id="sleepy-title" class="status-title">Sleepiness</h3>
-                <div id="sleepy-bar-head" class="status-head">
-                    <div id="sleepy0" class="bar"></div>
-                    <div id="sleepy1" class="bar"></div>
-                    <div id="sleepy2" class="bar"></div>
-                    <div id="sleepy3" class="bar"></div>
-                    <div id="sleepy4" class="bar"></div>
-                    <div id="sleepy5" class="bar"></div>
-                    <div id="sleepy6" class="bar"></div>
-                    <div id="sleepy7" class="bar"></div>
-                    <div id="sleepy8" class="bar"></div>
-                    <div id="sleepy9" class="bar"></div>
-                </div>
-            </div>
-            <div id="bored-div" class="status-div">
-                <h3 id="bored-title" class="status-title">Boredom</h3>
-                <div id="bored-bar-head" class="status-head">
-                    <div id="bored0" class="bar"></div>
-                    <div id="bored1" class="bar"></div>
-                    <div id="bored2" class="bar"></div>
-                    <div id="bored3" class="bar"></div>
-                    <div id="bored4" class="bar"></div>
-                    <div id="bored5" class="bar"></div>
-                    <div id="bored6" class="bar"></div>
-                    <div id="bored7" class="bar"></div>
-                    <div id="bored8" class="bar"></div>
-                    <div id="bored9" class="bar"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pet-section" class="pet-section">
-            <div id="pet" class="pet"></div>
-            <section id="rps-container" class="rps-container">
-                <div id="rps" class="rps">
-                    <div id="pet-choice" class="pet-choice">
-                        <img src="" alt="" id="pet-choice-image" class="rps-image">
-                        <p id="pet-choice-text" class="option-text"></p>
+                <div id="hungry-div" class="status-div">
+                    <h3 id="hungry-title" class="status-title">Hunger</h3>
+                    <div id="hungry-bar-head" class="status-head">
+                        <div id="hungry0" class="bar"></div>
+                        <div id="hungry1" class="bar"></div>
+                        <div id="hungry2" class="bar"></div>
+                        <div id="hungry3" class="bar"></div>
+                        <div id="hungry4" class="bar"></div>
+                        <div id="hungry5" class="bar"></div>
+                        <div id="hungry6" class="bar"></div>
+                        <div id="hungry7" class="bar"></div>
+                        <div id="hungry8" class="bar"></div>
+                        <div id="hungry9" class="bar"></div>
                     </div>
-                    <p id="rps-message" class="rps-message">Click to play</p>
-                    <div id="player-choice-div" class="player-choice-div">
-                        <div id="rock-div" class="player-option">
-                            <img src="https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="rock" id="rock" class="rps-image" />
-                            <p id="rock-text" class="rps-text">Rock</p>
-                        </div>
-                        <div id="paper-div" class="player-option">
-                            <img src="https://images.unsplash.com/photo-1496262967815-132206202600?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="paper" id="paper" class="rps-image" />
-                            <p id="paper-text" class="rps-text">Paper</p>
-                        </div>
-                        <div id="scissors-div" class="player-option">
-                            <img src="https://images.unsplash.com/photo-1610434538996-232c255e67de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80" alt="scissors" id="scissors" class="rps-image" />
-                            <p id="scissors-text" class="rps-text">Scissors</p>
-                        </div>
+                </div>
+                <div id="sleepy-div" class="status-div">
+                    <h3 id="sleepy-title" class="status-title">Sleepiness</h3>
+                    <div id="sleepy-bar-head" class="status-head">
+                        <div id="sleepy0" class="bar"></div>
+                        <div id="sleepy1" class="bar"></div>
+                        <div id="sleepy2" class="bar"></div>
+                        <div id="sleepy3" class="bar"></div>
+                        <div id="sleepy4" class="bar"></div>
+                        <div id="sleepy5" class="bar"></div>
+                        <div id="sleepy6" class="bar"></div>
+                        <div id="sleepy7" class="bar"></div>
+                        <div id="sleepy8" class="bar"></div>
+                        <div id="sleepy9" class="bar"></div>
+                    </div>
+                </div>
+                <div id="bored-div" class="status-div">
+                    <h3 id="bored-title" class="status-title">Boredom</h3>
+                    <div id="bored-bar-head" class="status-head">
+                        <div id="bored0" class="bar"></div>
+                        <div id="bored1" class="bar"></div>
+                        <div id="bored2" class="bar"></div>
+                        <div id="bored3" class="bar"></div>
+                        <div id="bored4" class="bar"></div>
+                        <div id="bored5" class="bar"></div>
+                        <div id="bored6" class="bar"></div>
+                        <div id="bored7" class="bar"></div>
+                        <div id="bored8" class="bar"></div>
+                        <div id="bored9" class="bar"></div>
                     </div>
                 </div>
             </section>
+            <section id="pet-section" class="pet-section">
+                <div id="pet" class="pet"></div>
+                <section id="rps-container" class="rps-container">
+                    <div id="rps" class="rps">
+                        <div id="pet-choice" class="pet-choice">
+                            <img src="" alt="" id="pet-choice-image" class="rps-image">
+                            <p id="pet-choice-text" class="option-text"></p>
+                        </div>
+                        <p id="rps-message" class="rps-message">Click to play</p>
+                        <div id="player-choice-div" class="player-choice-div">
+                            <div id="rock-div" class="player-option">
+                                <img src="https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="rock" id="rock" class="rps-image" />
+                                <p id="rock-text" class="rps-text">Rock</p>
+                            </div>
+                            <div id="paper-div" class="player-option">
+                                <img src="https://images.unsplash.com/photo-1496262967815-132206202600?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="paper" id="paper" class="rps-image" />
+                                <p id="paper-text" class="rps-text">Paper</p>
+                            </div>
+                            <div id="scissors-div" class="player-option">
+                                <img src="https://images.unsplash.com/photo-1610434538996-232c255e67de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80" alt="scissors" id="scissors" class="rps-image" />
+                                <p id="scissors-text" class="rps-text">Scissors</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <h2 id="game-message" class="game-message"></h2>
+            <section id="action-section" class="action-section">
+                <button id="feed-button" class="action-button">Feed Me</button>
+                <button id="lights-button" class="action-button">Lights <span id="lights-indicator">Off</span></button>
+                <button id="play-button" class="action-button">Play with Me</button>
+            </section>
         </section>
-
-        <h2 id="game-message" class="game-message"></h2>
-        <section id="action-section" class="action-section">
-            <button id="feed-button" class="action-button">Feed Me</button>
-            <button id="lights-button" class="action-button">Lights <span id="lights-indicator">Off</span></button>
-            <button id="play-button" class="action-button">Play with Me</button>
-        </section>
-    </section>
+        <!-- <section id="end-screen" class="end-screen"> -->
+            <h2 id="end-message" class="end-message"></h2>
+        <!-- </section> -->
 
 
     </main>
