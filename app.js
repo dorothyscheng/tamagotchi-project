@@ -2,13 +2,27 @@ class Tamagotchi {
     constructor(name) {
         this.name=name;
         this.age=1;
-        this.hunger=4;
-        this.sleepiness=3;
-        this.boredom=2;
+        this.hunger=0;
+        this.sleepiness=0;
+        this.boredom=0;
+        this.hungerInterval;
+        this.sleepinessInterval;
+        this.boredomInteral;
+        this.ageInterval;
         Tamagotchi.player=this;
     }
     static player={};
 }
+
+function updateAge() {
+    const player=Tamagotchi.player;
+    const ageText=$('#age-text');
+    let  currentAge=player.age;
+    Tamagotchi.player.ageInterval=setInterval(()=>{
+        Tamagotchi.player.age=currentAge++;
+        ageText.text(currentAge);
+    },60000);
+};
 
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
@@ -61,6 +75,7 @@ function startGame() {
     updateHunger();
     updateSleepiness();
     updateBoredom();
+    updateAge();
 };
 
 function namePet(name) {
