@@ -65,6 +65,10 @@ function updateBoredom() {
         };
     };
 }
+function updateGameMessage() {
+    $('#game-message').addClass('reveal');
+    setTimeout(()=>$('#game-message').removeClass('reveal'),5000);
+}
 
 // INCREMENT STATS
 // Hunger increases every 30 seconds
@@ -91,8 +95,13 @@ function increaseBoredom() {
 
 // PLAYER ACTIONS
 function feedPet() {
-    Tamagotchi.player.hunger--;
-    updateHunger();
+    if (Tamagotchi.player.hunger>0) {
+        Tamagotchi.player.hunger--;
+        updateHunger();
+    } else {
+        $('#game-message').text(`${Tamagotchi.player.name} isn't hungry!`);
+        updateGameMessage();
+    };
 }
 function toggleLights() {
     const $petSection=$('#pet-section');
@@ -111,13 +120,24 @@ function toggleLights() {
 };
 // Sleeping for 10 seconds subtracts 1 sleepiness
 function sleep() {
-    clearInterval(Tamagotchi.player.sleepinessInterval);
-    $('#feed-button').off();
-    $('#play-button').off();
-    Tamagotchi.player.sleepinessInterval=setInterval(()=>{
-        Tamagotchi.player.sleepiness--;
-        updateSleepiness();
-    },10000);
+    if (Tamagotchi.player.sleepiness>0) {
+        clearInterval(Tamagotchi.player.sleepinessInterval);
+        $('#feed-button').off();
+        $('#play-button').off();
+        Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+            Tamagotchi.player.sleepiness--;
+            updateSleepiness();
+            if (Tamagotchi.player.sleepiness<=0) {
+                $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
+                toggleLights();
+                updateGameMessage();
+            };
+        },10000);
+    } else {
+        $('#game-message').text(`${Tamagotchi.player.name} isn't sleepy!`);
+        toggleLights();
+        updateGameMessage();
+    };
 }
 function togglePlay() {
     const $playButton=$('#play-button');
@@ -132,7 +152,6 @@ function togglePlay() {
         playRPS();
     }
 };
-
 function playRPS() {
     const options=[
         {object: 'Rock',src: 'https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
@@ -148,7 +167,6 @@ function playRPS() {
     $('#rps-container').slideDown();
     $('.rps-image').on('click',resolveRPS);
 };
-
 function resolveRPS(e) {
     $('#play-button').off();
     $('.rps-image').off();
@@ -188,10 +206,14 @@ function resolveRPS(e) {
         $rpsMessage.text('Click to play');
     },2200);
 };
-
 function decreaseBoredom() {
-    Tamagotchi.player.boredom--;
-    updateBoredom();
+    if (Tamagotchi.player.boredom>0) {
+        Tamagotchi.player.boredom--;
+        updateBoredom();
+    } else {
+        $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
+        updateGameMessage();
+    };
 };
 
 function startGame() {
@@ -211,12 +233,10 @@ function startGame() {
     $('#lights-button').on('click',toggleLights);
     $('#play-button').on('click',togglePlay);
 };
-
 function namePet(name) {
     new Tamagotchi(name);
     startGame();
 }
-
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#submit-button').on('click',(e)=>{
