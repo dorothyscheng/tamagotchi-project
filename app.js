@@ -97,6 +97,17 @@ function increaseBoredom() {
     },60000);
 }
 
+// PLAYER ACTIONS
+function feedPet() {
+    clearInterval(Tamagotchi.player.hungerInterval);
+    const player=Tamagotchi.player;
+    let currentHunger=player.hunger;
+    currentHunger--;
+    Tamagotchi.player.hunger=currentHunger;
+    updateHunger();
+    setTimeout(increaseHunger,5000);
+}
+
 function startGame() {
     const player=Tamagotchi.player;
     $('#start-screen').fadeOut();
@@ -108,6 +119,7 @@ function startGame() {
     updateBoredom();
     updateAge();
     increaseHunger();
+    $('#feed-button').on('click',feedPet);
 };
 
 function namePet(name) {
