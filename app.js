@@ -1,17 +1,23 @@
 class Tamagotchi {
-    constructor(name) {
+    constructor(name,faveFood) {
         this.name=name;
         this.age=1;
         this.hunger=5;
         this.sleepiness=2;
         this.boredom=2;
+        this.faveFood=faveFood;
         this.hungerInterval;
         this.sleepinessInterval;
         this.boredomInterval;
         this.ageInterval;
+        this.walkingTimeout1;
+        this.walkingTimeout2;
+        this.walkingTimeout3;
+        this.walkingTimeout4;
         Tamagotchi.player=this;
     }
     static player={};
+    static colors=['#000','#fff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066'];
 }
 // UPDATE STAT DISPLAYS
 // Age increases every 1 minute
@@ -100,12 +106,15 @@ function increaseBoredom() {
         };
     },20000);
 }
-
 // PLAYER ACTIONS
 function feedPet() {
     if (Tamagotchi.player.hunger>0) {
+        $('#feed-button').off();
+        $('#game-message').text(`${Tamagotchi.player.name} loves ${Tamagotchi.player.faveFood}!`);
+        updateGameMessage();
         Tamagotchi.player.hunger--;
         updateHunger();
+        setTimeout(()=>$('#feed-button').on('click',feedPet),3000);
     } else {
         $('#game-message').text(`${Tamagotchi.player.name} isn't hungry!`);
         updateGameMessage();
@@ -120,7 +129,7 @@ function toggleLights() {
         sleep();
     } else {
         $lightsIndicator.text('Off');
-        $('.eye-fill').removeClass('sleeping');
+        $('.pet').removeClass('hide');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',feedPet);
@@ -130,14 +139,14 @@ function toggleLights() {
     };
 };
 function sleepMessage() {
-    $('#game-message').text(`${Tamagotchi.player.name} is trying to sleep!`);
+    $('#game-message').text(`Shh...${Tamagotchi.player.name} is sleeping!`);
     updateGameMessage();
 }
 // Sleeping for 10 seconds subtracts 1 sleepiness
 function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
-        $('.eye-fill').addClass('sleeping');
+        $('.pet').addClass('hide');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',sleepMessage);
@@ -254,12 +263,47 @@ function startGame() {
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
         $('#play-button').on('click',togglePlay);
-        setTimeout(petWalk,10000);
+        setTimeout(walkingRecursion,15000);
     },1000);
 };
-function namePet(name) {
-    new Tamagotchi(name);
+function createPet(name,faveFood) {
+    new Tamagotchi(name,faveFood);
     startGame();
+}
+function colorPicker(direction,type) {
+    const $footColor=$('.foot-fill');
+    const $tailColor=$('.tail-fill');
+    const $bodyColor=$('.pet-fill');
+    if (type==='foot') {
+        const currentColor=$footColor.css('background-color');
+        console.log(currentColor);
+    } else if (type==='body') {
+        const currentColor=$bodyColor.css('background-color');
+        console.log(currentColor);
+    } else {
+        const currentColor=$tailColor.css('background-color');
+        console.log(currentColor)
+    };
+}
+function colorPassThrough(e) {
+    const $selected=$(e.target);
+    if ($selected.hasClass('fa-angle-left')) {
+        if ($selected.hasClass('body')) {
+            colorPicker(-1,'body');
+        } else if ($selected.hasClass('foot')) {
+            colorPicker,(-1,'foot');
+        } else {
+            colorPicker,(-1,'tail');
+        };
+    } else {
+        if ($selected.hasClass('body')) {
+            colorPicker(1,'body');
+        } else if ($selected.hasClass('foot')) {
+            colorPicker,(1,'foot');
+        } else {
+            colorPicker,(1,'tail');
+        };
+    };
 }
 function endGame() {
     clearInterval(Tamagotchi.player.boredomInterval);
@@ -274,37 +318,35 @@ function endGame() {
     },1000);
 }
 // PET MOVEMENT
-function petWalk() {
-    const $petImages=$('#pet-images');
-    // const $petSitting=$('#pet-sitting');
-    // const $petBehind=$('#pet-behind');
-    $petImages.addClass('walking');
-    setTimeout(walkingRecursion,5000);
-};
 function walkingRecursion() {
     const $petImages=$('#pet-images');
     const $petSitting=$('#pet-sitting');
     const $petBehind=$('#pet-behind');
     $petImages.css('animation-play-state','paused');
     $petSitting.fadeOut();
-    setTimeout(()=>{
+    Tamagotchi.player.walkingTimeout1= setTimeout(()=>{
         $petBehind.fadeIn();
-        setTimeout(()=>{
+        Tamagotchi.player.walkingTimeout2= setTimeout(()=>{
             $petBehind.fadeOut();
-            setTimeout(()=>{
+            Tamagotchi.player.walkingTimeout3= setTimeout(()=>{
                 $petSitting.fadeIn();
                 $petImages.css('animation-play-state','running');
-                setTimeout(walkingRecursion,5000);
+                Tamagotchi.player.walkingTimeout4= setTimeout(walkingRecursion,5000);
             },500);
         },5000)
     },500);
 };
-
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
+$('#fave-food').on('click',()=>$('#fave-food').val(''));
 $('#submit-button').on('click',(e)=>{
     e.preventDefault();
-    if ($('#pet-name').val().trim()) {
-        namePet($('#pet-name').val().trim());
+    if ($('#pet-name').val().trim() && $('#fave-food').val().trim()) {
+        const name=$('#pet-name').val().trim();
+        const food=$('#fave-food').val().trim();
+        createPet(name,food);
     };
 });
+
+$('.fa-angle-left').on('click',colorPassThrough);
+$('.fa-angle-right').on('click',colorPassThrough);
