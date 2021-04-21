@@ -261,10 +261,11 @@ function decreaseBoredom() {
     Tamagotchi.player.boredom--;
     updateBoredom();
 };
-
+// GAME CREATION FUNCTIONS
 function startGame() {
     const player=Tamagotchi.player;
     $('#start-screen').fadeOut();
+    $('#saved-pets-section').fadeOut();
     $('#title').fadeOut();
     $('#title').hide().text(player.name).fadeIn();
     $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
@@ -386,15 +387,23 @@ function walkingRecursion() {
         },5000)
     },500);
 };
-// SAVE GAME
+// SAVE FUNCTIONS
 function saveGame() {
     let savedPets=JSON.parse(localStorage.getItem('savedPets')) || [];
     const currentPet=Tamagotchi.player;
-    savedPets.push(currentPet);
+    let existingPet=false;
+    for (let i=0; i<savedPets.length; i++) {
+        if (currentPet.name===savedPets[i].name) {
+            savedPets[i]=currentPet;
+            existingPet=true;
+        };
+    };
+    if (!existingPet) {
+        savedPets.push(currentPet);
+    };
     localStorage.setItem('savedPets',JSON.stringify(savedPets));
     location.reload();
 }
-// SAVED PETS
 function viewSavedPets() {
     $('#saved-pets-section').fadeIn();
     $('#close').on('click',()=>$('#saved-pets-section').fadeOut());
@@ -411,8 +420,17 @@ function viewSavedPets() {
             const $newAge=$(`<td>${savedPets[i].age}</td>`);
             $newRow.append($newAge);
             $savedPetsTable.append($newRow);
+            $newName.on('click',loadSavedPet);
         };
     };
+}
+function loadSavedPet(e) {
+    const $selected=$(e.target);
+    const index=parseInt($selected.attr('id').slice(5));
+    const savedPets=JSON.parse(localStorage.getItem('savedPets'));
+    const selectedPet=savedPets[index];
+    Tamagotchi.player=selectedPet;
+    startGame();
 }
 function clearSavedPets() {
     localStorage.removeItem('savedPets');
