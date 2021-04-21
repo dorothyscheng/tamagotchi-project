@@ -238,6 +238,7 @@ body {
 
 .status-head {
     display: flex;
+    background-color: rgba(128,128,128,.5);
 }
 
 .bar {
@@ -471,7 +472,6 @@ body {
     display: flex;
     justify-content: space-around;
 }
-
 .action-button {
     font-size: 30px;
     cursor: pointer;
@@ -479,12 +479,10 @@ body {
     color: #fff;
     width: 240px;
 }
-
 .action-button:hover {
     color: #39ff14;
     border: 4px solid #39ff14;
 }
-
 .game-message {
     text-align: center;
     height: 30px;
@@ -494,44 +492,42 @@ body {
     margin-bottom: 30px;
     margin-top: 20px;
 }
-
 .save-section {
     display: flex;
     flex-direction: row-reverse;
     margin-top: 30px;
 }
-
 .save-section > .game-button {
     width: 200px;
     margin-right: 20px;
 }
-
 /* GAME END */
 .end-section {
     display: none;
 }
-
 .end-container{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .end-message {
     text-align: center;
     margin-bottom: 20px;
 }
-
 /* CLASSES THAT CHANGE */
 .reveal {
     opacity: 1;
 }
-
 .filled {
     background-color: #39ff14;
 }
-
 .hide {
     opacity: 0;
+}
+.urgent {
+    background-color: #FF6600;
+}
+.final {
+    background-color:#ff0000;
 }

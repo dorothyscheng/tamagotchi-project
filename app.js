@@ -45,39 +45,59 @@ function updateAge() {
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
     const player=Tamagotchi.player;
+    let fillClass ='filled';
+    if (player.hunger>6 && player.hunger<9) {
+        fillClass='urgent';
+    } else if (player.hunger>=9) {
+        fillClass='final';
+    };
     for (let i=0; i<$hungryBars.length; i++) {
         const $currentBar=$hungryBars.eq(i);
         const index=$currentBar.attr('id').charAt(6);
         if (player.hunger>index) {
-            $currentBar.addClass('filled');
+            $currentBar.attr('class','bar');
+            $currentBar.addClass(fillClass);
         } else {
-            $currentBar.removeClass('filled');
+            $currentBar.attr('class','bar');
         };
     };
 }
 function updateSleepiness() {
     const $sleepyBars=$('#sleepy-bar-head').children();
-    // const player=Tamagotchi.player;
+    let fillClass ='filled';
+    if (Tamagotchi.player.sleepiness>6 && Tamagotchi.player.sleepiness<9) {
+        fillClass='urgent';
+    } else if (Tamagotchi.player.sleepiness>=9) {
+        fillClass='final';
+    };
     for (let i=0; i<$sleepyBars.length; i++) {
         const $currentBar=$sleepyBars.eq(i);
         const index=$currentBar.attr('id').charAt(6);
         if (Tamagotchi.player.sleepiness>index) {
-            $currentBar.addClass('filled');
+            $currentBar.attr('class','bar');
+            $currentBar.addClass(fillClass);
         } else {
-            $currentBar.removeClass('filled');
+            $currentBar.attr('class','bar');
         };
     };
 }
 function updateBoredom() {
     const $boredBars=$('#bored-bar-head').children();
     const player=Tamagotchi.player;
+    let fillClass ='filled';
+    if (player.boredom>6 && player.boredom<9) {
+        fillClass='urgent';
+    } else if (player.boredom>=9) {
+        fillClass='final';
+    };
     for (let i=0; i<$boredBars.length; i++) {
         const $currentBar=$boredBars.eq(i);
         const index=$currentBar.attr('id').charAt(5);
         if (player.boredom>index) {
-            $currentBar.addClass('filled');
+            $currentBar.attr('class','bar');
+            $currentBar.addClass(fillClass);
         } else {
-            $currentBar.removeClass('filled');
+            $currentBar.attr('class','bar');
         };
     };
 }
