@@ -1,5 +1,5 @@
 class Tamagotchi {
-    constructor(name,faveFood,body,foot,tail) {
+    constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
         this.hunger=5;
@@ -13,13 +13,22 @@ class Tamagotchi {
         this.bodyColorIndex=body;
         this.footColorIndex=foot;
         this.tailColorIndex=tail;
+        this.backgroundIndex=background;
         Tamagotchi.player=this;
     }
     static player={};
-    static colors=['#000000','#ffffff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066','#0D2B73','#D4D7DE','#1EEC09'];
+    static colors=['#000000','#ffffff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066','#0D2B73','#D4D7DE','#24781B'];
+    static backgrounds=[
+        '',
+        'https://images.unsplash.com/photo-1603033156166-2ae22eb2b7e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1913&q=80',
+        'https://images.unsplash.com/photo-1568729064400-d81b375ab4ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3626&q=80',
+        'https://images.unsplash.com/photo-1544612318-bcab56ed6311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2207&q=80',
+        'https://images.unsplash.com/photo-1598967460051-c2ffd802d09e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2106&q=80'
+    ];
     static bodyColorIndex=0;
     static footColorIndex=2;
     static tailColorIndex=1;
+    static backgroundIndex=0;
 }
 // UPDATE STAT DISPLAYS
 // Age increases every 1 minute
@@ -123,15 +132,18 @@ function feedPet() {
     };
 }
 function toggleLights() {
+    const player=Tamagotchi.player;
     const $petSection=$('#pet-section');
     const $lightsIndicator=$('#lights-indicator')
     $petSection.toggleClass('lights-off');
     if ($petSection.hasClass('lights-off')) {
         $lightsIndicator.text('On');
+        $('#pet-section').css('background-image','url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80")');
         sleep();
     } else {
         $lightsIndicator.text('Off');
         $('.pet').removeClass('hide');
+        $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',feedPet);
@@ -253,6 +265,7 @@ function startGame() {
     $('#start-screen').fadeOut();
     $('#title').fadeOut();
     $('#title').hide().text(player.name).fadeIn();
+    $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
     setTimeout(()=>{
         $('#play-screen').fadeIn();
         updateHunger();
@@ -268,8 +281,8 @@ function startGame() {
         setTimeout(walkingRecursion,15000);
     },1000);
 };
-function createPet(name,faveFood) {
-    new Tamagotchi(name,faveFood);
+function createPet(name,food,body,foot,tail,background) {
+    new Tamagotchi(name,food,body,foot,tail,background);
     startGame();
 }
 function colorPicker(direction,type) {
@@ -321,6 +334,25 @@ function colorPassThrough(e) {
         };
     };
 }
+function backgroundPicker(direction) {
+    const currentBgIndex=Tamagotchi.backgroundIndex;
+    let nextBgIndex=currentBgIndex+direction;
+    if (nextBgIndex<0) {
+        nextBgIndex=Tamagotchi.backgrounds.length-1;
+    } else if (nextBgIndex>Tamagotchi.backgrounds.length-1) {
+        nextBgIndex=0;
+    };
+    $('#start-screen').css('background-image',`url(${Tamagotchi.backgrounds[nextBgIndex]})`);
+    Tamagotchi.backgroundIndex=nextBgIndex;
+}
+function backgroundPassThrough(e) {
+    const $selection=$(e.target);
+    if ($selection.hasClass('fa-angle-left')) {
+        backgroundPicker(-1);
+    } else {
+        backgroundPicker(1);
+    };
+}
 function endGame() {
     clearInterval(Tamagotchi.player.boredomInterval);
     clearInterval(Tamagotchi.player.hungerInterval);
@@ -363,8 +395,10 @@ $('#submit-button').on('click',(e)=>{
         const body=Tamagotchi.bodyColorIndex;
         const foot=Tamagotchi.footColorIndex;
         const tail=Tamagotchi.tailColorIndex;
-        createPet(name,food,body,foot,tail);
+        const background=Tamagotchi.backgroundIndex;
+        createPet(name,food,body,foot,tail,background);
     };
 });
 
 $('.color-pickers').on('click',colorPassThrough);
+$('.background').on('click',backgroundPassThrough);

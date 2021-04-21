@@ -14,7 +14,6 @@ button {
 body {
     background-color: #000;
     color: #fff;
-    /* animation: bgcolor 10s infinite; */
     transition: background-color 3s;
 }
 
@@ -59,6 +58,8 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .egg-div {
@@ -81,6 +82,21 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 70px;
+    cursor: pointer;
+}
+
+.background-pickers {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.background {
+    margin: 0 20px;
+}
+
+.background-pickers {
     font-size: 70px;
     cursor: pointer;
 }
@@ -157,6 +173,8 @@ body {
     margin-top: 50px;
     width: 100%;
     height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .pet-images {
@@ -407,12 +425,6 @@ body {
 
 .filled {
     background-color: #39ff14;
-}
-
-.lights-off {
-    /* z-index: 1; */
-    /* opacity: 1; */
-    background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhcnJ5JTIwc2t5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
 }
 
 .hide {
