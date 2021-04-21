@@ -67,6 +67,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(128,128,128,.5);
 }
 
 .color-title {

@@ -2,12 +2,13 @@ class Tamagotchi {
     constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
-        this.hunger=5;
+        this.hunger=0;
         this.sleepiness=2;
-        this.boredom=2;
+        this.boredom=0;
         this.faveFood=faveFood;
         this.hungerInterval;
         this.sleepinessInterval;
+        this.sleepingInterval;
         this.boredomInterval;
         this.ageInterval;
         this.bodyColorIndex=body;
@@ -57,11 +58,11 @@ function updateHunger() {
 }
 function updateSleepiness() {
     const $sleepyBars=$('#sleepy-bar-head').children();
-    const player=Tamagotchi.player;
+    // const player=Tamagotchi.player;
     for (let i=0; i<$sleepyBars.length; i++) {
         const $currentBar=$sleepyBars.eq(i);
         const index=$currentBar.attr('id').charAt(6);
-        if (player.sleepiness>index) {
+        if (Tamagotchi.player.sleepiness>index) {
             $currentBar.addClass('filled');
         } else {
             $currentBar.removeClass('filled');
@@ -101,6 +102,7 @@ function increaseHunger() {
 function increaseSleepiness() {
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         Tamagotchi.player.sleepiness++;
+        console.log("updated sleepiness to "+Tamagotchi.player.sleepiness);
         updateSleepiness();
         if (Tamagotchi.player.sleepiness>10) {
             endGame();
@@ -149,7 +151,10 @@ function toggleLights() {
         $('#feed-button').on('click',feedPet);
         $('#play-button').on('click',togglePlay);
         clearInterval(Tamagotchi.player.sleepinessInterval);
-        setTimeout(increaseSleepiness,5000);
+        setTimeout(()=>{
+            clearInterval(Tamagotchi.player.sleepinessInterval);
+            increaseSleepiness();
+        },5000);
     };
 };
 function sleepMessage() {
@@ -168,10 +173,13 @@ function sleep() {
         Tamagotchi.player.sleepinessInterval=setInterval(()=>{
             Tamagotchi.player.sleepiness--;
             updateSleepiness();
-            if (Tamagotchi.player.sleepiness<=0) {
+            console.log("new sleepiness is: "+Tamagotchi.player.sleepiness);
+            if (Tamagotchi.player.sleepiness===0) {
                 $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
                 toggleLights();
                 updateGameMessage();
+            } else if (Tamagotchi.player.sleepiness<0) {
+                console.log("sleepiness is "+ Tamagotchi.player.sleepiness);
             };
         },10000);
     } else {
@@ -309,7 +317,6 @@ function colorPicker(direction,type) {
         Tamagotchi.footColorIndex=nextColorIndex;
     } else if (type==='body') {
         Tamagotchi.bodyColorIndex=nextColorIndex;
-        console.log(Tamagotchi.bodyColorIndex);
     } else {
         Tamagotchi.tailColorIndex=nextColorIndex;
     };
