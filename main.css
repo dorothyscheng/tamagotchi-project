@@ -211,7 +211,7 @@ body {
         width: 20px
     }
     50% {
-        width: 23px
+        width: 25px
     }
     100% {
         width: 20px;
@@ -252,48 +252,55 @@ body {
         margin-left: 0;
     }
     50% {
-        margin-left: 5px;
+        margin-left: 3px;
     }
     100% {
         margin-left: 0;
     }
 }
 
-.walk-right {
+.walking {
+    animation-name: walking;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+/* .walk-left {
     animation-name: walkRight;
     animation-duration: 5s;
     animation-fill-mode: forwards;
-    /* animation-iteration-count: infinite; */
-    animation-direction: alternate;
-}
+    animation-direction: reverse;
+} */
 
-@keyframes walkRight {
+@keyframes walking {
     0% {
         transform: rotate(0deg);
         margin-left: 100px;
     }
     10% {
-        transform: rotate(10deg);
+        transform: rotate(5deg);
         margin-left: 200px;
     }
     20% {
-        transform: rotate(-10deg);
+        transform: rotate(-5deg);
         margin-left: 300px;
     }
     30% {
-        transform: rotate(10deg);
+        transform: rotate(5deg);
         margin-left: 400px;
     }
     40% {
-        transform: rotate(-10deg);
+        transform: rotate(-5deg);
         margin-left: 500px;
     }
     50% {
-        transform: rotate(10deg);
+        transform: rotate(5deg);
         margin-left: 600px;
     }
     60% {
-        transform: rotate(-10deg);
+        transform: rotate(-5deg);
         margin-left: 700px;
     }
     100% {

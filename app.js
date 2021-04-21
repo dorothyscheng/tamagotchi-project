@@ -66,7 +66,7 @@ function updateBoredom() {
 }
 function updateGameMessage() {
     $('#game-message').addClass('reveal');
-    setTimeout(()=>$('#game-message').removeClass('reveal'),5000);
+    setTimeout(()=>$('#game-message').removeClass('reveal'),3000);
 }
 
 // INCREMENT STATS
@@ -168,24 +168,30 @@ function togglePlay() {
         $('#feed-button').off();
         $('#lights-button').off();
         playRPS();
-    }
-};
+    };
+}
 function playRPS() {
-    const options=[
-        {object: 'Rock',src: 'https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
-        {object: 'Paper',src: 'https://images.unsplash.com/photo-1496262967815-132206202600?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
-        {object: 'Scissors',src:'https://images.unsplash.com/photo-1610434538996-232c255e67de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'}
-    ];
-    const petChoice=options[Math.floor(Math.random()*options.length)];
-    const $petChoiceImage=$('#pet-choice-image');
-    const $petChoiceText=$('#pet-choice-text');
-    const $petChoiceHeader=$('#pet-choice-header');
-    $petChoiceImage.attr('src',petChoice.src);
-    $petChoiceImage.attr('alt',petChoice.object);
-    $petChoiceText.text(petChoice.object);
-    $petChoiceHeader.text(`${Tamagotchi.player.name} picked:`);
-    $('#rps-container').slideDown();
-    $('.rps-image').on('click',resolveRPS);
+    if (Tamagotchi.player.boredom>0) {
+        const options=[
+            {object: 'Rock',src: 'https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
+            {object: 'Paper',src: 'https://images.unsplash.com/photo-1496262967815-132206202600?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'},
+            {object: 'Scissors',src:'https://images.unsplash.com/photo-1610434538996-232c255e67de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'}
+        ];
+        const petChoice=options[Math.floor(Math.random()*options.length)];
+        const $petChoiceImage=$('#pet-choice-image');
+        const $petChoiceText=$('#pet-choice-text');
+        const $petChoiceHeader=$('#pet-choice-header');
+        $petChoiceImage.attr('src',petChoice.src);
+        $petChoiceImage.attr('alt',petChoice.object);
+        $petChoiceText.text(petChoice.object);
+        $petChoiceHeader.text(`${Tamagotchi.player.name} picked:`);
+        $('#rps-container').slideDown();
+        $('.rps-image').on('click',resolveRPS);
+    } else {
+        $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
+        updateGameMessage();
+        togglePlay();
+    };
 };
 function resolveRPS(e) {
     $('#play-button').off();
@@ -227,13 +233,8 @@ function resolveRPS(e) {
     },2200);
 };
 function decreaseBoredom() {
-    if (Tamagotchi.player.boredom>0) {
-        Tamagotchi.player.boredom--;
-        updateBoredom();
-    } else {
-        $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
-        updateGameMessage();
-    };
+    Tamagotchi.player.boredom--;
+    updateBoredom();
 };
 
 function startGame() {
@@ -275,16 +276,29 @@ function endGame() {
 // PET MOVEMENT
 function petWalk() {
     const $petImages=$('#pet-images');
+    // const $petSitting=$('#pet-sitting');
+    // const $petBehind=$('#pet-behind');
+    $petImages.addClass('walking');
+    setTimeout(walkingRecursion,5000);
+};
+function walkingRecursion() {
+    const $petImages=$('#pet-images');
     const $petSitting=$('#pet-sitting');
     const $petBehind=$('#pet-behind');
-    $petImages.addClass('walk-right');
+    $petImages.css('animation-play-state','paused');
+    $petSitting.fadeOut();
     setTimeout(()=>{
-        $petSitting.fadeOut();
-        setTimeout(()=>$petBehind.fadeIn(),500);
-    },10000);
+        $petBehind.fadeIn();
+        setTimeout(()=>{
+            $petBehind.fadeOut();
+            setTimeout(()=>{
+                $petSitting.fadeIn();
+                $petImages.css('animation-play-state','running');
+                setTimeout(walkingRecursion,5000);
+            },500);
+        },5000)
+    },500);
 };
-
-
 
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
