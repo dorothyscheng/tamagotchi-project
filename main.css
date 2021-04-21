@@ -143,18 +143,25 @@ body {
     justify-content: space-between; */
 }
 
+.pet-images {
+    width: 800px;
+    /* height: 200px; */
+    display: flex;
+    justify-content: space-between;
+}
+
 .pet {
-    width: 400px;
-    height: 200px;
+    /* width: 400px;
+    height: 200px; */
     margin-bottom: 0;
     margin-left: 100px;
     display: flex;
     flex-direction: column;
+    transition: transform 5s;
 }
 
-.head {
-    display: flex;
-    flex-direction: column;
+.behind {
+    display:none;
 }
 
 .pet-row {
@@ -173,6 +180,10 @@ body {
 
 .pet-fill, .sleeping {
     background-color: black;
+}
+
+.behind-fill {
+    background-color: #FFC0CB;
 }
 
 .pet-left {
@@ -245,6 +256,49 @@ body {
     }
     100% {
         margin-left: 0;
+    }
+}
+
+.walk-right {
+    animation-name: walkRight;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    /* animation-iteration-count: infinite; */
+    animation-direction: alternate;
+}
+
+@keyframes walkRight {
+    0% {
+        transform: rotate(0deg);
+        margin-left: 100px;
+    }
+    10% {
+        transform: rotate(10deg);
+        margin-left: 200px;
+    }
+    20% {
+        transform: rotate(-10deg);
+        margin-left: 300px;
+    }
+    30% {
+        transform: rotate(10deg);
+        margin-left: 400px;
+    }
+    40% {
+        transform: rotate(-10deg);
+        margin-left: 500px;
+    }
+    50% {
+        transform: rotate(10deg);
+        margin-left: 600px;
+    }
+    60% {
+        transform: rotate(-10deg);
+        margin-left: 700px;
+    }
+    100% {
+        transform: rotate(0deg);
+        margin-left: 800px;
     }
 }
 

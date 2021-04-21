@@ -253,6 +253,7 @@ function startGame() {
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
         $('#play-button').on('click',togglePlay);
+        setTimeout(petWalk,10000);
     },1000);
 };
 function namePet(name) {
@@ -271,6 +272,20 @@ function endGame() {
         $('#end-message').fadeIn();
     },1000);
 }
+// PET MOVEMENT
+function petWalk() {
+    const $petImages=$('#pet-images');
+    const $petSitting=$('#pet-sitting');
+    const $petBehind=$('#pet-behind');
+    $petImages.addClass('walk-right');
+    setTimeout(()=>{
+        $petSitting.fadeOut();
+        setTimeout(()=>$petBehind.fadeIn(),500);
+    },10000);
+};
+
+
+
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#submit-button').on('click',(e)=>{
