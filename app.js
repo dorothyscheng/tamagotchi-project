@@ -3,8 +3,8 @@ class Tamagotchi {
         this.name=name;
         this.age=1;
         this.hunger=5;
-        this.sleepiness=2;
-        this.boredom=3;
+        this.sleepiness=4;
+        this.boredom=6;
         this.faveFood=faveFood;
         this.hungerInterval;
         this.sleepinessInterval;
@@ -31,7 +31,7 @@ class Tamagotchi {
     static backgroundIndex=0;
 }
 // UPDATE DISPLAYS
-// Age increases every 3 minute
+// Age increases every 1 minute
 function updateAge() {
     const player=Tamagotchi.player;
     const ageText=$('#age-text');
@@ -40,7 +40,7 @@ function updateAge() {
         currentAge++;
         Tamagotchi.player.age=currentAge;
         ageText.text(currentAge);
-    },180000);
+    },60000);
 };
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
@@ -86,7 +86,7 @@ function updateGameMessage() {
     setTimeout(()=>$('#game-message').removeClass('reveal'),3000);
 }
 // INCREMENT STATS
-// Hunger increases every 30 seconds
+// Hunger increases every 15 seconds
 function increaseHunger() {
     Tamagotchi.player.hungerInterval=setInterval(()=>{
         Tamagotchi.player.hunger++;
@@ -94,7 +94,7 @@ function increaseHunger() {
         if (Tamagotchi.player.hunger>10) {
             endGame();
         };
-    },30000);
+    },15000);
 }
 // Sleepiness increases every 30 seconds
 function increaseSleepiness() {
@@ -106,7 +106,7 @@ function increaseSleepiness() {
         };
     },30000);
 }
-// Boredom increases every 20 seconds
+// Boredom increases every 10 seconds
 function increaseBoredom() {
     Tamagotchi.player.boredomInterval=setInterval(()=>{
         Tamagotchi.player.boredom++;
@@ -114,7 +114,7 @@ function increaseBoredom() {
         if (Tamagotchi.player.boredom>10) {
             endGame();
         };
-    },20000);
+    },10000);
 }
 // PLAYER ACTIONS
 function feedPet() {
@@ -365,7 +365,7 @@ function endGame() {
     $('#end-message').text(`${Tamagotchi.player.name} died from neglect...`);
     setTimeout(()=>{
         $('#end-section').fadeIn();
-        $('#reload-button').on('click',location.reload);
+        $('#reload-button').on('click',()=>location.reload());
     },1000);
 }
 // PET MOVEMENT
@@ -374,18 +374,20 @@ function walkingRecursion() {
     const $petSitting=$('#pet-sitting');
     const $petBehind=$('#pet-behind');
     $petImages.css('animation-play-state','paused');
-    $petSitting.fadeOut();
-    Tamagotchi.player.walkingTimeout1= setTimeout(()=>{
-        $petBehind.fadeIn();
-        Tamagotchi.player.walkingTimeout2= setTimeout(()=>{
-            $petBehind.fadeOut();
-            Tamagotchi.player.walkingTimeout3= setTimeout(()=>{
-                $petSitting.fadeIn();
-                $petImages.css('animation-play-state','running');
-                Tamagotchi.player.walkingTimeout4= setTimeout(walkingRecursion,5000);
-            },500);
-        },5000)
-    },500);
+    setTimeout(()=>{
+        $petSitting.fadeOut();
+        setTimeout(()=>{
+            $petBehind.fadeIn();
+            setTimeout(()=>{
+                $petBehind.fadeOut();
+                setTimeout(()=>{
+                    $petSitting.fadeIn();
+                    $petImages.css('animation-play-state','running');
+                    setTimeout(walkingRecursion,5000);
+                },500);
+            },2000)
+        },500);
+    },10000);
 };
 // SAVE FUNCTIONS
 function saveGame() {
