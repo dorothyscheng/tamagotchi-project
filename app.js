@@ -394,6 +394,30 @@ function saveGame() {
     localStorage.setItem('savedPets',JSON.stringify(savedPets));
     location.reload();
 }
+// SAVED PETS
+function viewSavedPets() {
+    $('#saved-pets-section').fadeIn();
+    $('#close').on('click',()=>$('#saved-pets-section').fadeOut());
+    const $savedPetRows=$('.saved-pet-row');
+    let savedPets=JSON.parse(localStorage.getItem('savedPets'));
+    $savedPetRows.remove();
+    const $savedPetsTable=$('#saved-pets-table');
+    if (savedPets!==null) {
+        savedPets.sort((x,y)=>x.age-y.age);
+        for (let i=0;i<savedPets.length;i++) {
+            const $newRow=$('<tr class="saved-pet-row">');
+            const $newName=$(`<td id=index${i} class="name">${savedPets[i].name}</td>`);
+            $newRow.append($newName);
+            const $newAge=$(`<td>${savedPets[i].age}</td>`);
+            $newRow.append($newAge);
+            $savedPetsTable.append($newRow);
+        };
+    };
+}
+function clearSavedPets() {
+    localStorage.removeItem('savedPets');
+    viewSavedPets();
+}
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#fave-food').on('click',()=>$('#fave-food').val(''));
@@ -412,3 +436,5 @@ $('#submit-button').on('click',(e)=>{
 $('.color-pickers').on('click',colorPassThrough);
 $('.background').on('click',backgroundPassThrough);
 $('#save-button').on('click',saveGame);
+$('#load-saved').on('click',viewSavedPets);
+$('#clear').on('click',clearSavedPets);

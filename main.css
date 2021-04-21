@@ -132,6 +132,57 @@ body {
     border: 4px solid #39ff14;
 }
 
+/* SAVED PETS */
+/* Reference on how to create a modal: https://www.w3schools.com/howto/howto_css_modals.asp */
+.saved-pets-section {
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1;
+    position: fixed;
+}
+
+.saved-pets-content {
+    background-color: #fff;
+    margin: 20% auto;
+    width: 500px;
+}
+
+.saved-pets-table {
+    color: #000;
+}
+
+.name {
+    cursor: pointer;
+}
+
+.name:hover {
+    color: #39ff14;
+}
+
+.clear {
+    cursor: pointer;
+    border: 4px solid transparent;
+}
+
+.clear:hover {
+    color: #39ff14;
+    border: 4px solid #39ff14;
+}
+
+.close {
+    color: #000;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #39ff14;
+}
+
 /* GAME PLAY */
 .play-screen {
     display: none;
@@ -169,7 +220,7 @@ body {
     margin: 0 1px;
 }
 
-/* PET DIV */
+/* PET SECTION */
 .pet-section {
     margin-top: 50px;
     width: 100%;
@@ -217,12 +268,17 @@ body {
     background-color: #FFC0CB;
 }
 
-.pet-left {
-    animation: pet-left 5s infinite;
+.foot-fill {
+    background-color: #808080;
 }
 
-.pet-right {
-    animation: pet-right 5s infinite;
+.tail-fill {
+    background-color: #ffffff;
+}
+
+/* PET ANIMATIONS */
+.pet-left {
+    animation: pet-left 5s infinite;
 }
 
 @keyframes pet-left {
@@ -237,6 +293,10 @@ body {
     }
 }
 
+.pet-right {
+    animation: pet-right 5s infinite;
+}
+
 @keyframes pet-right {
     0% {
         width: 20px
@@ -249,19 +309,11 @@ body {
     }
 }
 
-.foot-fill {
-    background-color: #808080;
-}
-
-.tail-fill {
-    background-color: #ffffff;
-}
-
 .tail-animate {
-    animation: tail 5s infinite;
+    animation: tail-animate 5s infinite;
 }
 
-@keyframes tail {
+@keyframes tail-animate {
     0% {
         width: 20px;
     }
