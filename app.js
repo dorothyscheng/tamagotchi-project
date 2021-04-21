@@ -1,5 +1,5 @@
 class Tamagotchi {
-    constructor(name,faveFood) {
+    constructor(name,faveFood,body,foot,tail) {
         this.name=name;
         this.age=1;
         this.hunger=5;
@@ -10,14 +10,16 @@ class Tamagotchi {
         this.sleepinessInterval;
         this.boredomInterval;
         this.ageInterval;
-        this.walkingTimeout1;
-        this.walkingTimeout2;
-        this.walkingTimeout3;
-        this.walkingTimeout4;
+        this.bodyColorIndex=body;
+        this.footColorIndex=foot;
+        this.tailColorIndex=tail;
         Tamagotchi.player=this;
     }
     static player={};
-    static colors=['#000','#fff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066'];
+    static colors=['#000000','#ffffff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066','#0D2B73','#D4D7DE','#1EEC09'];
+    static bodyColorIndex=0;
+    static footColorIndex=2;
+    static tailColorIndex=1;
 }
 // UPDATE STAT DISPLAYS
 // Age increases every 1 minute
@@ -271,18 +273,32 @@ function createPet(name,faveFood) {
     startGame();
 }
 function colorPicker(direction,type) {
-    const $footColor=$('.foot-fill');
-    const $tailColor=$('.tail-fill');
-    const $bodyColor=$('.pet-fill');
+    let $cellsToChange;
+    let currentColorIndex;
     if (type==='foot') {
-        const currentColor=$footColor.css('background-color');
-        console.log(currentColor);
+        currentColorIndex=Tamagotchi.footColorIndex;
+        $cellsToChange=$('.foot-fill');
     } else if (type==='body') {
-        const currentColor=$bodyColor.css('background-color');
-        console.log(currentColor);
+        currentColorIndex=Tamagotchi.bodyColorIndex;
+        $cellsToChange=$('.pet-fill');
     } else {
-        const currentColor=$tailColor.css('background-color');
-        console.log(currentColor)
+        currentColorIndex=Tamagotchi.tailColorIndex;
+        $cellsToChange=$('.tail-fill');
+    };
+    let nextColorIndex=currentColorIndex+direction;
+    if (nextColorIndex<0) {
+        nextColorIndex=Tamagotchi.colors.length-1;
+    } else if (nextColorIndex>Tamagotchi.colors.length-1) {
+        nextColorIndex=0;
+    };
+    $cellsToChange.css('background-color',Tamagotchi.colors[nextColorIndex]);
+    if (type==='foot') {
+        Tamagotchi.footColorIndex=nextColorIndex;
+    } else if (type==='body') {
+        Tamagotchi.bodyColorIndex=nextColorIndex;
+        console.log(Tamagotchi.bodyColorIndex);
+    } else {
+        Tamagotchi.tailColorIndex=nextColorIndex;
     };
 }
 function colorPassThrough(e) {
@@ -291,17 +307,17 @@ function colorPassThrough(e) {
         if ($selected.hasClass('body')) {
             colorPicker(-1,'body');
         } else if ($selected.hasClass('foot')) {
-            colorPicker,(-1,'foot');
+            colorPicker(-1,'foot');
         } else {
-            colorPicker,(-1,'tail');
+            colorPicker(-1,'tail');
         };
     } else {
         if ($selected.hasClass('body')) {
             colorPicker(1,'body');
         } else if ($selected.hasClass('foot')) {
-            colorPicker,(1,'foot');
+            colorPicker(1,'foot');
         } else {
-            colorPicker,(1,'tail');
+            colorPicker(1,'tail');
         };
     };
 }
@@ -344,9 +360,11 @@ $('#submit-button').on('click',(e)=>{
     if ($('#pet-name').val().trim() && $('#fave-food').val().trim()) {
         const name=$('#pet-name').val().trim();
         const food=$('#fave-food').val().trim();
-        createPet(name,food);
+        const body=Tamagotchi.bodyColorIndex;
+        const foot=Tamagotchi.footColorIndex;
+        const tail=Tamagotchi.tailColorIndex;
+        createPet(name,food,body,foot,tail);
     };
 });
 
-$('.fa-angle-left').on('click',colorPassThrough);
-$('.fa-angle-right').on('click',colorPassThrough);
+$('.color-pickers').on('click',colorPassThrough);
