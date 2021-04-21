@@ -2,13 +2,12 @@ class Tamagotchi {
     constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
-        this.hunger=0;
+        this.hunger=5;
         this.sleepiness=2;
-        this.boredom=0;
+        this.boredom=3;
         this.faveFood=faveFood;
         this.hungerInterval;
         this.sleepinessInterval;
-        this.sleepingInterval;
         this.boredomInterval;
         this.ageInterval;
         this.bodyColorIndex=body;
@@ -31,8 +30,8 @@ class Tamagotchi {
     static tailColorIndex=1;
     static backgroundIndex=0;
 }
-// UPDATE STAT DISPLAYS
-// Age increases every 1 minute
+// UPDATE DISPLAYS
+// Age increases every 3 minute
 function updateAge() {
     const player=Tamagotchi.player;
     const ageText=$('#age-text');
@@ -41,7 +40,7 @@ function updateAge() {
         currentAge++;
         Tamagotchi.player.age=currentAge;
         ageText.text(currentAge);
-    },60000);
+    },180000);
 };
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
@@ -86,7 +85,6 @@ function updateGameMessage() {
     $('#game-message').addClass('reveal');
     setTimeout(()=>$('#game-message').removeClass('reveal'),3000);
 }
-
 // INCREMENT STATS
 // Hunger increases every 30 seconds
 function increaseHunger() {
@@ -102,7 +100,6 @@ function increaseHunger() {
 function increaseSleepiness() {
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         Tamagotchi.player.sleepiness++;
-        console.log("updated sleepiness to "+Tamagotchi.player.sleepiness);
         updateSleepiness();
         if (Tamagotchi.player.sleepiness>10) {
             endGame();
@@ -173,14 +170,11 @@ function sleep() {
         Tamagotchi.player.sleepinessInterval=setInterval(()=>{
             Tamagotchi.player.sleepiness--;
             updateSleepiness();
-            console.log("new sleepiness is: "+Tamagotchi.player.sleepiness);
             if (Tamagotchi.player.sleepiness===0) {
                 $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
                 toggleLights();
                 updateGameMessage();
-            } else if (Tamagotchi.player.sleepiness<0) {
-                console.log("sleepiness is "+ Tamagotchi.player.sleepiness);
-            };
+            }
         },10000);
     } else {
         $('#game-message').text(`${Tamagotchi.player.name} isn't sleepy!`);
@@ -367,9 +361,10 @@ function endGame() {
     clearInterval(Tamagotchi.player.ageInterval);
     $('#play-screen').fadeOut();
     $('body').removeClass('animate-color');
-    $('#end-message').hide().text(`${Tamagotchi.player.name} died from neglect...`);
+    $('#end-message').text(`${Tamagotchi.player.name} died from neglect...`);
     setTimeout(()=>{
-        $('#end-message').fadeIn();
+        $('#end-section').fadeIn();
+        $('#reload-button').on('click',location.reload);
     },1000);
 }
 // PET MOVEMENT
@@ -391,6 +386,14 @@ function walkingRecursion() {
         },5000)
     },500);
 };
+// SAVE GAME
+function saveGame() {
+    let savedPets=JSON.parse(localStorage.getItem('savedPets')) || [];
+    const currentPet=Tamagotchi.player;
+    savedPets.push(currentPet);
+    localStorage.setItem('savedPets',JSON.stringify(savedPets));
+    location.reload();
+}
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#fave-food').on('click',()=>$('#fave-food').val(''));
@@ -406,6 +409,6 @@ $('#submit-button').on('click',(e)=>{
         createPet(name,food,body,foot,tail,background);
     };
 });
-
 $('.color-pickers').on('click',colorPassThrough);
 $('.background').on('click',backgroundPassThrough);
+$('#save-button').on('click',saveGame);

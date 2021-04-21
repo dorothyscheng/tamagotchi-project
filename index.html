@@ -303,7 +303,7 @@
             <form id="start-form" class="start-form">
                 <input type="text" id="pet-name" class="form-entry" value="Pet's Name">
                 <input type="text" id="fave-food" class="form-entry" value="Favorite Food">
-                <button id="submit-button" class="submit-button">Submit</button>
+                <button id="submit-button" class="game-button">Submit</button>
             </form>
         </section>
         <section id="play-screen" class="play-screen">
@@ -1084,8 +1084,16 @@
                 <button id="lights-button" class="action-button">Lights <span id="lights-indicator">Off</span></button>
                 <button id="play-button" class="action-button">Play with Me</button>
             </section>
+            <section id="save-section" class="save-section">
+                <button id="save-button" class="game-button">Save & Exit</button>
+            </section>
         </section>
-        <h2 id="end-message" class="end-message"></h2>
+        <section id="end-section" class="end-section">
+            <div id="end-container" class="end-container">
+                <h2 id="end-message" class="end-message"></h2>
+                <button id="reload-button" class="game-button">Start Over</button>
+            </div>
+        </section>
 
 
     </main>

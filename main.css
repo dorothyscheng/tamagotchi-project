@@ -119,7 +119,7 @@ body {
     text-align: center;
 }
 
-.submit-button {
+.game-button {
     font-size: 20px;
     cursor: pointer;
     border: 4px solid transparent;
@@ -127,7 +127,7 @@ body {
     width: 150px;
 }
 
-.submit-button:hover {
+.game-button:hover {
     color: #39ff14;
     border: 4px solid #39ff14;
 }
@@ -415,8 +415,32 @@ body {
     margin-top: 20px;
 }
 
+.save-section {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 30px;
+}
+
+.save-section > .game-button {
+    width: 200px;
+    margin-right: 20px;
+}
+
+/* GAME END */
+.end-section {
+    display: none;
+}
+
+.end-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .end-message {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /* CLASSES THAT CHANGE */
