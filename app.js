@@ -36,6 +36,7 @@ function updateAge() {
     const player=Tamagotchi.player;
     const ageText=$('#age-text');
     let  currentAge=player.age;
+    ageText.text(currentAge);
     Tamagotchi.player.ageInterval=setInterval(()=>{
         currentAge++;
         Tamagotchi.player.age=currentAge;
@@ -241,7 +242,7 @@ function playRPS() {
 function resolveRPS(e) {
     $('#play-button').off();
     $('.rps-image').off();
-    const player=Tamagotchi.player;
+    // const player=Tamagotchi.player;
     const playerChoice=$(e.target).attr('id');
     const petChoice=$('#pet-choice-text').text().toLowerCase();
     const $rpsMessage=$('#rps-message');
