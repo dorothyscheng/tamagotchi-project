@@ -147,7 +147,7 @@ function increaseHunger() {
         },25000);
     }
 }
-// Sleepiness increases every 30 seconds
+// Sleepiness increases every 20 seconds
 function increaseSleepiness() {
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         Tamagotchi.player.sleepiness++;
@@ -155,7 +155,7 @@ function increaseSleepiness() {
         if (Tamagotchi.player.sleepiness>10) {
             endGame();
         };
-    },30000);
+    },20000);
 }
 // Boredom increases every 10 seconds OR 20 seconds with toy
 function increaseBoredom() {
@@ -349,6 +349,9 @@ function startGame() {
     $('#title').fadeOut();
     $('#title').hide().text(player.name).fadeIn();
     $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
+    $('.foot-fill').css('background-color',Tamagotchi.colors[player.footColorIndex]);
+    $('.pet-fill').css('background-color',Tamagotchi.colors[player.bodyColorIndex]);
+    $('.tail-fill').css('background-color',Tamagotchi.colors[player.tailColorIndex]);
     if (player.bed) {
         $('#bed').addClass('purchased');
         $('#bed-icon').addClass('reveal');
@@ -549,11 +552,16 @@ function deleteSinglePet(e) {
 }
 // SHOP FUNCTIONS
 function openShop() {
-    $('#shop-section').fadeIn();
-    clearInterval(Tamagotchi.player.hungerInterval);
-    clearInterval(Tamagotchi.player.boredomInterval);
-    clearInterval(Tamagotchi.player.sleepinessInterval);
-    $('.shop-img').on('click',buyItem);
+    if ($('#pet-section').hasClass('lights-off')) {
+        $('#game-message').text('Turn on the lights to access the shop');
+        updateGameMessage();
+    } else {
+        $('#shop-section').fadeIn();
+        clearInterval(Tamagotchi.player.hungerInterval);
+        clearInterval(Tamagotchi.player.boredomInterval);
+        clearInterval(Tamagotchi.player.sleepinessInterval);
+        $('.shop-img').on('click',buyItem);
+    };
 }
 function closeShop() {
     $('#shop-section').fadeOut();
@@ -569,15 +577,17 @@ function buyItem(e) {
             Tamagotchi.player.bed=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.bed;
             $('#bed').addClass('purchased');
+            $('#bed-icon').addClass('reveal');
         } else if (id==='toy' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.toy) {
             Tamagotchi.player.toy=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.toy;
             $('#toy').addClass('purchased');
+            $('#toy-icon').addClass('reveal');
         } else if (id==='feeder' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.feeder) {
             Tamagotchi.player.feeder=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.feeder;
             $('#feeder').addClass('purchased');
-            $('#hungry-icon').addClass('reveal');
+            $('#feeder-icon').addClass('reveal');
         } else {
             $('#shop-title').text(`You can't afford the pet ${id}.`);
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
