@@ -37,6 +37,11 @@ class Tamagotchi {
     static footColorIndex=2;
     static tailColorIndex=1;
     static backgroundIndex=0;
+    static shopPrices={
+        bed:30,
+        toy:20,
+        feeder:20,
+    }
 }
 // UPDATE DISPLAYS
 // Age increases every 1 minute
@@ -53,6 +58,9 @@ function updateAge() {
 };
 function updateCoins() {
     const coinsText=$('#coins-text');
+    if (Tamagotchi.player.coins<0) {
+        Tamagotchi.player.coins=0;
+    };
     coinsText.text(Tamagotchi.player.coins);
 }
 function updateHunger() {
@@ -311,6 +319,7 @@ function startGame() {
     $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
     setTimeout(()=>{
         $('#play-screen').fadeIn();
+        updateCoins();
         updateHunger();
         updateSleepiness();
         updateBoredom();
@@ -500,12 +509,36 @@ function openShop() {
     clearInterval(Tamagotchi.player.hungerInterval);
     clearInterval(Tamagotchi.player.boredomInterval);
     clearInterval(Tamagotchi.player.sleepinessInterval);
+    $('.shop-img').on('click',buyItem);
 }
 function closeShop() {
     $('#shop-section').fadeOut();
     increaseHunger();
     increaseSleepiness();
     increaseBoredom();
+}
+function buyItem(e) {
+    const $selected=$(e.target);
+    if (!$selected.hasClass('purchased')) {
+        const id=$selected.attr('id');
+        if (id==='bed' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.bed) {
+            Tamagotchi.player.bed=true;
+            Tamagotchi.player.coins-=Tamagotchi.shopPrices.bed;
+            $('#bed').addClass('purchased');
+        } else if (id==='toy' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.toy) {
+            Tamagotchi.player.toy=true;
+            Tamagotchi.player.coins-=Tamagotchi.shopPrices.toy;
+            $('#toy').addClass('purchased');
+        } else if (id==='feeder' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.feeder) {
+            Tamagotchi.player.feeder=true;
+            Tamagotchi.player.coins-=Tamagotchi.shopPrices.feeder;
+            $('#feeder').addClass('purchased');
+        } else {
+            $('#shop-title').text(`You can't afford the pet ${id}.`);
+            setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
+        }
+        updateCoins();
+    }
 }
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
