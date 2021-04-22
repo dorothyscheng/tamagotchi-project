@@ -153,12 +153,14 @@ function increaseHunger() {
 function increaseSleepiness() {
     Tamagotchi.player.sleepinessIntervalCheck=true;
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
-        Tamagotchi.player.sleepiness++;
-        console.log('increased sleepiness to '+Tamagotchi.player.sleepiness);
-        updateSleepiness();
-        if (Tamagotchi.player.sleepiness>10) {
-            endGame();
-        };
+        if (Tamagotchi.player.sleepinessIntervalCheck) {
+            Tamagotchi.player.sleepiness++;
+            console.log('increased sleepiness to '+Tamagotchi.player.sleepiness);
+            updateSleepiness();
+            if (Tamagotchi.player.sleepiness>10) {
+                endGame();
+            };
+        }
     },20000);
 }
 // Boredom increases every 10 seconds OR 20 seconds with toy
@@ -185,6 +187,7 @@ function increaseBoredom() {
 function feedPet() {
     if (Tamagotchi.player.hunger>0) {
         $('#feed-button').off();
+        document.getElementById('food-sound').play();
         $('#game-message').text(`${Tamagotchi.player.name} loves ${Tamagotchi.player.faveFood}!`);
         updateGameMessage();
         Tamagotchi.player.hunger--;
@@ -207,15 +210,16 @@ function toggleLights() {
         sleep();
     } else {
         $lightsIndicator.text('Off');
+        const sleepingSound=document.getElementById('sleeping-sound');
+        sleepingSound.pause();
+        sleepingSound.currentTime=0;
         $('.pet').removeClass('hide');
         $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',feedPet);
         $('#play-button').on('click',togglePlay);
-        // changed below from sleepiness to sleeping
         clearInterval(Tamagotchi.player.sleepingInterval);
-        // increaseSleepiness();
         setTimeout(()=>{
             if (!Tamagotchi.player.sleepinessIntervalCheck) {
                 increaseSleepiness();
@@ -232,13 +236,13 @@ function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
         Tamagotchi.player.sleepinessIntervalCheck=false;
+        document.getElementById('sleeping-sound').play();
         $('.pet').addClass('hide');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',sleepMessage);
         $('#play-button').on('click',sleepMessage);
         if (!Tamagotchi.player.bed) {
-            // changed below from sleepiness to sleeping
             Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
                 updateSleepiness();
@@ -249,7 +253,6 @@ function sleep() {
                 }
             },10000);
         } else {
-            // changed below from sleepiness to sleeping
             Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
                 updateSleepiness();
@@ -274,6 +277,7 @@ function togglePlay() {
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
     } else {
+        document.getElementById('transition').play();
         $('#feed-button').off();
         $('#lights-button').off();
         playRPS();
@@ -311,28 +315,35 @@ function resolveRPS(e) {
     $('#pet-choice').toggleClass('reveal');
     if (playerChoice===petChoice) {
         $rpsMessage.text('You tied!');
+        document.getElementById('coin-tie').play();
     } else if (petChoice==='rock') {
         if (playerChoice==='paper') {
             $rpsMessage.text('You won!');
             Tamagotchi.player.coins+=2;
+            document.getElementById('coin-sound').play();
         } else if (playerChoice==='scissors') {
             $rpsMessage.text('You lost!');
+            document.getElementById('coin-loss').play();
             Tamagotchi.player.coins--;
         };
     } else if (petChoice==='paper') {
         if (playerChoice==='rock') {
             $rpsMessage.text('You lost!');
+            document.getElementById('coin-loss').play();
             Tamagotchi.player.coins--;
         } else if (playerChoice==='scissors') {
             $rpsMessage.text('You won!');
             Tamagotchi.player.coins+=2;
+            document.getElementById('coin-sound').play();
         };
     } else if (petChoice==='scissors') {
         if (playerChoice==='rock') {
             $rpsMessage.text('You won!');
             Tamagotchi.player.coins+=2;
+            document.getElementById('coin-sound').play();
         } else if (playerChoice==='paper') {
             $rpsMessage.text('You lost!');
+            document.getElementById('coin-loss').play();
             Tamagotchi.player.coins--;
         };
     };
@@ -468,6 +479,7 @@ function endGame() {
     Tamagotchi.player.sleepinessIntervalCheck=false;
     clearInterval(Tamagotchi.player.ageInterval);
     $('#play-screen').fadeOut();
+    document.getElementById('game-over').play();
     $('body').removeClass('animate-color');
     $('#end-message').text(`${Tamagotchi.player.name} died from neglect...`);
     setTimeout(()=>{
@@ -592,16 +604,19 @@ function buyItem(e) {
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.bed;
             $('#bed').addClass('purchased');
             $('#bed-icon').addClass('reveal');
+            document.getElementById('get-item').play();
         } else if (id==='toy' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.toy) {
             Tamagotchi.player.toy=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.toy;
             $('#toy').addClass('purchased');
             $('#toy-icon').addClass('reveal');
+            document.getElementById('get-item').play();
         } else if (id==='feeder' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.feeder) {
             Tamagotchi.player.feeder=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.feeder;
             $('#feeder').addClass('purchased');
             $('#feeder-icon').addClass('reveal');
+            document.getElementById('get-item').play();
         } else {
             $('#shop-title').text(`You can't afford the pet ${id}.`);
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
