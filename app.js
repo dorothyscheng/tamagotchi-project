@@ -9,6 +9,8 @@ class Tamagotchi {
         this.faveFood=faveFood;
         this.hungerInterval;
         this.sleepinessInterval;
+        this.sleepingInterval;
+        this.sleepinessIntervalCheck=false;
         this.boredomInterval;
         this.ageInterval;
         this.bodyColorIndex=body;
@@ -149,8 +151,10 @@ function increaseHunger() {
 }
 // Sleepiness increases every 20 seconds
 function increaseSleepiness() {
+    Tamagotchi.player.sleepinessIntervalCheck=true;
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         Tamagotchi.player.sleepiness++;
+        console.log('increased sleepiness to '+Tamagotchi.player.sleepiness);
         updateSleepiness();
         if (Tamagotchi.player.sleepiness>10) {
             endGame();
@@ -209,10 +213,13 @@ function toggleLights() {
         $('#play-button').off();
         $('#feed-button').on('click',feedPet);
         $('#play-button').on('click',togglePlay);
-        clearInterval(Tamagotchi.player.sleepinessInterval);
+        // changed below from sleepiness to sleeping
+        clearInterval(Tamagotchi.player.sleepingInterval);
+        // increaseSleepiness();
         setTimeout(()=>{
-            clearInterval(Tamagotchi.player.sleepinessInterval);
-            increaseSleepiness();
+            if (!Tamagotchi.player.sleepinessIntervalCheck) {
+                increaseSleepiness();
+            }
         },5000);
     };
 };
@@ -224,13 +231,15 @@ function sleepMessage() {
 function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
+        Tamagotchi.player.sleepinessIntervalCheck=false;
         $('.pet').addClass('hide');
         $('#feed-button').off();
         $('#play-button').off();
         $('#feed-button').on('click',sleepMessage);
         $('#play-button').on('click',sleepMessage);
         if (!Tamagotchi.player.bed) {
-            Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+            // changed below from sleepiness to sleeping
+            Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
                 updateSleepiness();
                 if (Tamagotchi.player.sleepiness===0) {
@@ -240,7 +249,8 @@ function sleep() {
                 }
             },10000);
         } else {
-            Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+            // changed below from sleepiness to sleeping
+            Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
                 updateSleepiness();
                 if (Tamagotchi.player.sleepiness===0) {
@@ -455,6 +465,7 @@ function endGame() {
     clearInterval(Tamagotchi.player.boredomInterval);
     clearInterval(Tamagotchi.player.hungerInterval);
     clearInterval(Tamagotchi.player.sleepinessInterval);
+    Tamagotchi.player.sleepinessIntervalCheck=false;
     clearInterval(Tamagotchi.player.ageInterval);
     $('#play-screen').fadeOut();
     $('body').removeClass('animate-color');
@@ -489,6 +500,7 @@ function walkingRecursion() {
 function saveGame() {
     let savedPets=JSON.parse(localStorage.getItem('savedPets')) || [];
     const currentPet=Tamagotchi.player;
+    currentPet.sleepinessIntervalCheck=false;
     let existingPet=false;
     for (let i=0; i<savedPets.length; i++) {
         if (currentPet.name===savedPets[i].name) {
@@ -529,6 +541,7 @@ function loadSavedPet(e) {
     const $selected=$(e.target);
     const index=parseInt($selected.attr('id').slice(5));
     const savedPets=JSON.parse(localStorage.getItem('savedPets'));
+    savedPets.sort((x,y)=>x.age-y.age);
     const selectedPet=savedPets[index];
     Tamagotchi.player=selectedPet;
     startGame();
@@ -560,6 +573,7 @@ function openShop() {
         clearInterval(Tamagotchi.player.hungerInterval);
         clearInterval(Tamagotchi.player.boredomInterval);
         clearInterval(Tamagotchi.player.sleepinessInterval);
+        Tamagotchi.player.sleepinessIntervalCheck=false;
         $('.shop-img').on('click',buyItem);
     };
 }
