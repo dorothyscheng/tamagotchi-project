@@ -317,6 +317,18 @@ function startGame() {
     $('#title').fadeOut();
     $('#title').hide().text(player.name).fadeIn();
     $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
+    if (player.bed) {
+        $('#bed').addClass('purchased');
+        $('#bed-icon').addClass('reveal');
+    };
+    if (player.toy) {
+        $('#toy').addClass('purchased');
+        $('#toy-icon').addClass('reveal');
+    };
+    if (player.feeder) {
+        $('#feeder').addClass('purchased');
+        $('#feeder-icon').addClass('reveal');
+    };
     setTimeout(()=>{
         $('#play-screen').fadeIn();
         updateCoins();
@@ -533,6 +545,7 @@ function buyItem(e) {
             Tamagotchi.player.feeder=true;
             Tamagotchi.player.coins-=Tamagotchi.shopPrices.feeder;
             $('#feeder').addClass('purchased');
+            $('#hungry-icon').addClass('reveal');
         } else {
             $('#shop-title').text(`You can't afford the pet ${id}.`);
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
