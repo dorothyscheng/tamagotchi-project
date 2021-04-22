@@ -5,22 +5,18 @@
     box-sizing: border-box;
     font-family: 'Zen Dots', sans-serif;
 }
-
 button {
     border: none;
     background: none;
 }
-
 body {
     background-color: #000;
     color: #fff;
     transition: background-color 3s;
 }
-
 .animate-color {
     animation: bgcolor 10s infinite;
 }
-
 /* background color animation: https://stackoverflow.com/questions/43371912/how-to-make-an-html-css-js-color-changing-background-like-kahoot-it-has */
 @keyframes bgcolor {
     0% {
@@ -42,7 +38,6 @@ body {
         background-color: #45a3e5
     }
 }
-
 /* HEADER */
 .header {
     display: flex;
@@ -51,7 +46,6 @@ body {
     align-items: center;
     height: 100px;
 }
-
 /* GAME START */
 .start-screen {
     display: flex;
@@ -61,7 +55,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 .egg-div {
     margin-right: 100px;
     display: flex;
@@ -69,16 +62,13 @@ body {
     align-items: center;
     background-color: rgba(128,128,128,.5);
 }
-
 .color-title {
     margin-bottom: 20px;
     font-size: 25px;
 }
-
 .egg-container {
     display: flex;
 }
-
 .color-pickers {
     display: flex;
     flex-direction: column;
@@ -86,45 +76,37 @@ body {
     font-size: 70px;
     cursor: pointer;
 }
-
 .background-pickers {
     display: flex;
     align-items: center;
     margin-top: 20px;
 }
-
 .background {
     margin: 0 20px;
 }
-
 .background-pickers {
     font-size: 70px;
     cursor: pointer;
 }
-
 .fas:hover {
     color: #39ff14;
 }
-
 .player-inputs {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .start-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .form-entry {
     height: 50px;
     margin-bottom: 20px;
     font-size: 20px;
     text-align: center;
 }
-
 .game-button {
     font-size: 20px;
     cursor: pointer;
@@ -132,7 +114,6 @@ body {
     color: #fff;
     width: 150px;
 }
-
 .load-button {
     font-size: 20px;
     cursor: pointer;
@@ -141,15 +122,13 @@ body {
     width: 300px;
     margin-top: 30px;
 }
-
 .game-button:hover, .load-button:hover {
     color: #39ff14;
     border: 4px solid #39ff14;
 }
-
 /* SAVED PETS */
 /* Reference on how to create a modal: https://www.w3schools.com/howto/howto_css_modals.asp */
-.saved-pets-section {
+.modal-section {
     display: none;
     width: 100%;
     height: 100%;
@@ -159,7 +138,6 @@ body {
     z-index: 1;
     position: fixed;
 }
-
 .saved-pets-content {
     background-color: #fff;
     margin: 10% auto;
@@ -168,7 +146,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .saved-pets-table, tr {
     color: #000;
     border: 1px solid #000;
@@ -177,33 +154,27 @@ body {
     width: 500px;
     font-size: 20px;
 }
-
 .name {
     cursor: pointer;
     padding: 10px 0;
 }
-
 .name:hover {
     color: #39ff14;
 }
-
 .delete {
     cursor: pointer;
     border: 4px solid transparent;
 }
-
 .clear {
     cursor: pointer;
     border: 4px solid transparent;
     margin-top: 20px;
     width: 200px;
 }
-
 .clear:hover, .delete:hover {
     color: #39ff14;
     border: 4px solid #39ff14;
 }
-
 .close {
     color: #000;
     font-size: 30px;
@@ -211,41 +182,38 @@ body {
     align-self: flex-end;
     margin-right: 10px;
 }
-
 .close:hover {
     color: #39ff14;
 }
-
 /* GAME PLAY */
 .play-screen {
     display: none;
 }
-
 /* STATS */
 .stats-section {
     display: flex;
     justify-content: space-evenly;
 }
-
-.age-div {
+.number-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.number-display {
     font-size: 30px;
 }
-
 .status-div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .status-title {
     font-size: 25px;
 }
-
 .status-head {
     display: flex;
     background-color: rgba(128,128,128,.5);
 }
-
 .bar {
     border: 2px solid #fff;
     width: 18px;
@@ -253,7 +221,6 @@ body {
     border-radius: 4px;
     margin: 0 1px;
 }
-
 /* PET SECTION */
 .pet-section {
     margin-top: 50px;
@@ -262,13 +229,11 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 .pet-images {
     width: 200px;
     display: flex;
     justify-content: space-between;
 }
-
 .pet {
     margin-bottom: 0;
     margin-left: 100px;
@@ -276,45 +241,35 @@ body {
     flex-direction: column;
     transition: transform 5s;
 }
-
 .behind {
     display:none;
 }
-
 .pet-row {
     display: flex;
 }
-
 .pet-cell {
     width: 20px;
     height: 20px;
 }
-
 .eye-fill {
     background-color: #39ff14;
 }
-
 .pet-fill {
     background-color: #000000;
 }
-
 .behind-fill {
     background-color: #FFC0CB;
 }
-
 .foot-fill {
     background-color: #808080;
 }
-
 .tail-fill {
     background-color: #ffffff;
 }
-
 /* PET ANIMATIONS */
 .pet-left {
     animation: pet-left 5s infinite;
 }
-
 @keyframes pet-left {
     0% {
         margin-left: 0;
@@ -326,11 +281,9 @@ body {
         margin-left: 0;
     }
 }
-
 .pet-right {
     animation: pet-right 5s infinite;
 }
-
 @keyframes pet-right {
     0% {
         width: 20px
@@ -342,11 +295,9 @@ body {
         width: 20px;
     }
 }
-
 .tail-animate {
     animation: tail-animate 5s infinite;
 }
-
 @keyframes tail-animate {
     0% {
         width: 20px;
@@ -358,11 +309,9 @@ body {
         width: 20px;
     }
 }
-
 .tail-top {
     animation: tail-top 5s infinite;
 }
-
 @keyframes tail-top {
     0% {
         margin-left: 0;
@@ -374,7 +323,6 @@ body {
         margin-left: 0;
     }
 }
-
 .walking {
     animation-name: walking;
     animation-duration: 5s;
@@ -383,7 +331,6 @@ body {
     animation-iteration-count: infinite;
     animation-delay: 10s;
 }
-
 @keyframes walking {
     0% {
         transform: rotate(0deg);
@@ -418,7 +365,6 @@ body {
         margin-left: 800px;
     }
 }
-
 /* ROCK PAPER SCISSORS */
 .rps-container {
     display: none;
@@ -429,14 +375,12 @@ body {
     border-radius: 4px;
     padding: 20px;
 }
-
 .rps {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 .pet-choice {
     margin-bottom: 20px;
     text-align: center;
@@ -447,11 +391,9 @@ body {
     font-size: 22px;
     margin: 10px 0;
 }
-
 .player-choice-div {
     display: flex;
 }
-
 .player-option {
     display: flex;
     flex-direction: column;
@@ -459,7 +401,6 @@ body {
     align-items: center;
     margin: 0 10px;
 }
-
 .rps-image {
     border-radius: 50%;
     width: 100px;
@@ -467,11 +408,9 @@ body {
     border: 4px solid #fff;
     cursor: pointer;
 }
-
 .rps-image:hover {
     border: 4px solid #39ff14;
 }
-
 /* ACTIONS */
 .action-section {
     display: flex;
@@ -499,7 +438,8 @@ body {
 }
 .save-section {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    /* flex-direction: row-reverse; */
     margin-top: 30px;
 }
 .save-section > .game-button {

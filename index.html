@@ -309,7 +309,7 @@
                 <button id="load-saved" class="load-button">Load a Saved Pet</button>
             </div>
         </section>
-        <section id="saved-pets-section" class="saved-pets-section">
+        <section id="saved-pets-section" class="modal-section">
             <div id="saved-pets-content" class="saved-pets-content">
                 <span id="close" class="close">&times;</span>
                 <table id="saved-pets-table" class="saved-pets-table">
@@ -324,9 +324,17 @@
         </section>
         <section id="play-screen" class="play-screen">
             <section id="stats-section" class="stats-section">
-                <div id="age-div" class="age-div">
-                    <h3 id="age-title" class="age-title">Age: 
-                    <span id="age-text" class="age-text"></span></h3>
+                <div id="number-container" class="number-container">
+                    <div id="age-div" class="number-display">
+                        <h3 id="age-title" class="number-title">Age: 
+                            <span id="age-text" class="number-text"></span>
+                        </h3>
+                    </div>
+                    <div id="coins-div" class="number-display">
+                        <h3 id="coins-title" class="number-title">Coins: 
+                            <span id="coins-text" class="number-text"></span>
+                        </h3>
+                    </div>
                 </div>
                 <div id="hungry-div" class="status-div">
                     <h3 id="hungry-title" class="status-title">Hunger</h3>
@@ -1101,6 +1109,7 @@
                 <button id="play-button" class="action-button">Play with Me</button>
             </section>
             <section id="save-section" class="save-section">
+                <button id="shop-button" class="game-button">Go to Shop</button>
                 <button id="save-button" class="game-button">Save & Exit</button>
             </section>
         </section>

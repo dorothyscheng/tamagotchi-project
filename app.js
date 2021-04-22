@@ -2,6 +2,7 @@ class Tamagotchi {
     constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
+        this.coins=0;
         this.hunger=5;
         this.sleepiness=4;
         this.boredom=6;
@@ -47,6 +48,10 @@ function updateAge() {
         ageText.text(currentAge);
     },60000);
 };
+function updateCoins() {
+    const coinsText=$('#coins-text');
+    coinsText.text(Tamagotchi.player.coins);
+}
 function updateHunger() {
     const $hungryBars=$('#hungry-bar-head').children();
     const player=Tamagotchi.player;
@@ -148,6 +153,7 @@ function feedPet() {
         $('#game-message').text(`${Tamagotchi.player.name} loves ${Tamagotchi.player.faveFood}!`);
         updateGameMessage();
         Tamagotchi.player.hunger--;
+        console.log(`decreased hunger to ${Tamagotchi.player.hunger}`);
         updateHunger();
         setTimeout(()=>$('#feed-button').on('click',feedPet),3000);
     } else {
@@ -246,7 +252,6 @@ function playRPS() {
 function resolveRPS(e) {
     $('#play-button').off();
     $('.rps-image').off();
-    // const player=Tamagotchi.player;
     const playerChoice=$(e.target).attr('id');
     const petChoice=$('#pet-choice-text').text().toLowerCase();
     const $rpsMessage=$('#rps-message');
@@ -256,23 +261,30 @@ function resolveRPS(e) {
     } else if (petChoice==='rock') {
         if (playerChoice==='paper') {
             $rpsMessage.text('You won!');
+            Tamagotchi.player.coins+=2;
         } else if (playerChoice==='scissors') {
             $rpsMessage.text('You lost!');
+            Tamagotchi.player.coins--;
         };
     } else if (petChoice==='paper') {
         if (playerChoice==='rock') {
             $rpsMessage.text('You lost!');
+            Tamagotchi.player.coins--;
         } else if (playerChoice==='scissors') {
             $rpsMessage.text('You won!');
+            Tamagotchi.player.coins+=2;
         };
     } else if (petChoice==='scissors') {
         if (playerChoice==='rock') {
             $rpsMessage.text('You won!');
+            Tamagotchi.player.coins+=2;
         } else if (playerChoice==='paper') {
             $rpsMessage.text('You lost!');
+            Tamagotchi.player.coins--;
         };
     };
     decreaseBoredom();
+    updateCoins();
     setTimeout(()=>{
         togglePlay();
     },2000);
