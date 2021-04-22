@@ -127,15 +127,25 @@ function updateGameMessage() {
     setTimeout(()=>$('#game-message').removeClass('reveal'),3000);
 }
 // INCREMENT STATS
-// Hunger increases every 15 seconds
+// Hunger increases every 15 seconds OR 25 seconds with feeder
 function increaseHunger() {
-    Tamagotchi.player.hungerInterval=setInterval(()=>{
-        Tamagotchi.player.hunger++;
-        updateHunger();
-        if (Tamagotchi.player.hunger>10) {
-            endGame();
-        };
-    },15000);
+    if (!Tamagotchi.player.feeder) {
+        Tamagotchi.player.hungerInterval=setInterval(()=>{
+            Tamagotchi.player.hunger++;
+            updateHunger();
+            if (Tamagotchi.player.hunger>10) {
+                endGame();
+            };
+        },15000);
+    } else {
+        Tamagotchi.player.hungerInterval=setInterval(()=>{
+            Tamagotchi.player.hunger++;
+            updateHunger();
+            if (Tamagotchi.player.hunger>10) {
+                endGame();
+            };
+        },25000);
+    }
 }
 // Sleepiness increases every 30 seconds
 function increaseSleepiness() {
@@ -147,15 +157,25 @@ function increaseSleepiness() {
         };
     },30000);
 }
-// Boredom increases every 10 seconds
+// Boredom increases every 10 seconds OR 20 seconds with toy
 function increaseBoredom() {
-    Tamagotchi.player.boredomInterval=setInterval(()=>{
-        Tamagotchi.player.boredom++;
-        updateBoredom();
-        if (Tamagotchi.player.boredom>10) {
-            endGame();
-        };
-    },10000);
+    if (!Tamagotchi.player.toy) {
+        Tamagotchi.player.boredomInterval=setInterval(()=>{
+            Tamagotchi.player.boredom++;
+            updateBoredom();
+            if (Tamagotchi.player.boredom>10) {
+                endGame();
+            };
+        },10000);
+    } else {
+        Tamagotchi.player.boredomInterval=setInterval(()=>{
+            Tamagotchi.player.boredom++;
+            updateBoredom();
+            if (Tamagotchi.player.boredom>10) {
+                endGame();
+            };
+        },20000);
+    }
 }
 // PLAYER ACTIONS
 function feedPet() {
@@ -200,7 +220,7 @@ function sleepMessage() {
     $('#game-message').text(`Shh...${Tamagotchi.player.name} is sleeping!`);
     updateGameMessage();
 }
-// Sleeping for 10 seconds subtracts 1 sleepiness
+// Sleeping for 10 sec subtracts 1 sleepiness OR sleeping for 5 sec subtracts 1 sleepiness with bed
 function sleep() {
     if (Tamagotchi.player.sleepiness>0) {
         clearInterval(Tamagotchi.player.sleepinessInterval);
@@ -209,15 +229,27 @@ function sleep() {
         $('#play-button').off();
         $('#feed-button').on('click',sleepMessage);
         $('#play-button').on('click',sleepMessage);
-        Tamagotchi.player.sleepinessInterval=setInterval(()=>{
-            Tamagotchi.player.sleepiness--;
-            updateSleepiness();
-            if (Tamagotchi.player.sleepiness===0) {
-                $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
-                toggleLights();
-                updateGameMessage();
-            }
-        },10000);
+        if (!Tamagotchi.player.bed) {
+            Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+                Tamagotchi.player.sleepiness--;
+                updateSleepiness();
+                if (Tamagotchi.player.sleepiness===0) {
+                    $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
+                    toggleLights();
+                    updateGameMessage();
+                }
+            },10000);
+        } else {
+            Tamagotchi.player.sleepinessInterval=setInterval(()=>{
+                Tamagotchi.player.sleepiness--;
+                updateSleepiness();
+                if (Tamagotchi.player.sleepiness===0) {
+                    $('#game-message').text(`${Tamagotchi.player.name} is awake!`);
+                    toggleLights();
+                    updateGameMessage();
+                }
+            },5000);
+        }
     } else {
         $('#game-message').text(`${Tamagotchi.player.name} isn't sleepy!`);
         toggleLights();
