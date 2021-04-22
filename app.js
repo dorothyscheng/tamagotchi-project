@@ -23,7 +23,11 @@ class Tamagotchi {
         'https://images.unsplash.com/photo-1603033156166-2ae22eb2b7e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1913&q=80',
         'https://images.unsplash.com/photo-1568729064400-d81b375ab4ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3626&q=80',
         'https://images.unsplash.com/photo-1544612318-bcab56ed6311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2207&q=80',
-        'https://images.unsplash.com/photo-1598967460051-c2ffd802d09e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2106&q=80'
+        'https://images.unsplash.com/photo-1598967460051-c2ffd802d09e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2106&q=80',
+        'https://images.unsplash.com/photo-1608931394404-5bb9d8cf8b53?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2021&q=80',
+        'https://images.unsplash.com/photo-1606374601055-ff7b45c448c1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2203&q=80',
+        'https://images.unsplash.com/photo-1611520474289-264fb8b502a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1916&q=80',
+        'https://images.unsplash.com/photo-1611163647499-a2befbd8d25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80'
     ];
     static bodyColorIndex=0;
     static footColorIndex=2;
