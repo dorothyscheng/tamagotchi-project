@@ -187,6 +187,11 @@ body {
     color: #39ff14;
 }
 
+.delete {
+    cursor: pointer;
+    border: 4px solid transparent;
+}
+
 .clear {
     cursor: pointer;
     border: 4px solid transparent;
@@ -194,7 +199,7 @@ body {
     width: 200px;
 }
 
-.clear:hover {
+.clear:hover, .delete:hover {
     color: #39ff14;
     border: 4px solid #39ff14;
 }

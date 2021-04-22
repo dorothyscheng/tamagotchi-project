@@ -442,6 +442,9 @@ function viewSavedPets() {
             $newRow.append($newName);
             const $newAge=$(`<td>${savedPets[i].age}</td>`);
             $newRow.append($newAge);
+            const $newDelete=$(`<td><button id=index${i} class="delete">Delete</button></td>`);
+            $newDelete.on('click',deleteSinglePet);
+            $newRow.append($newDelete);
             $savedPetsTable.append($newRow);
             $newName.on('click',loadSavedPet);
         };
@@ -455,8 +458,21 @@ function loadSavedPet(e) {
     Tamagotchi.player=selectedPet;
     startGame();
 }
-function clearSavedPets() {
+function clearAllPets() {
     localStorage.removeItem('savedPets');
+    viewSavedPets();
+}
+function deleteSinglePet(e) {
+    const $selected=$(e.target);
+    const selectedIndex=parseInt($selected.attr('id').slice(5));
+    const savedPets=JSON.parse(localStorage.getItem('savedPets'));
+    let newSavedPets=[];
+    savedPets.forEach((element,index)=>{
+        if (index!==selectedIndex) {
+            newSavedPets.push(element);
+        };
+    });
+    localStorage.setItem('savedPets',JSON.stringify(newSavedPets));
     viewSavedPets();
 }
 // EVENT LISTENERS
@@ -478,4 +494,4 @@ $('.color-pickers').on('click',colorPassThrough);
 $('.background').on('click',backgroundPassThrough);
 $('#save-button').on('click',saveGame);
 $('#load-saved').on('click',viewSavedPets);
-$('#clear').on('click',clearSavedPets);
+$('#clear').on('click',clearAllPets);
