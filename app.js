@@ -15,6 +15,9 @@ class Tamagotchi {
         this.footColorIndex=foot;
         this.tailColorIndex=tail;
         this.backgroundIndex=background;
+        this.bed=false;
+        this.feeder=false;
+        this.toy=false;
         Tamagotchi.player=this;
     }
     static player={};
@@ -491,6 +494,19 @@ function deleteSinglePet(e) {
     localStorage.setItem('savedPets',JSON.stringify(newSavedPets));
     viewSavedPets();
 }
+// SHOP FUNCTIONS
+function openShop() {
+    $('#shop-section').fadeIn();
+    clearInterval(Tamagotchi.player.hungerInterval);
+    clearInterval(Tamagotchi.player.boredomInterval);
+    clearInterval(Tamagotchi.player.sleepinessInterval);
+}
+function closeShop() {
+    $('#shop-section').fadeOut();
+    increaseHunger();
+    increaseSleepiness();
+    increaseBoredom();
+}
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#fave-food').on('click',()=>$('#fave-food').val(''));
@@ -511,3 +527,5 @@ $('.background').on('click',backgroundPassThrough);
 $('#save-button').on('click',saveGame);
 $('#load-saved').on('click',viewSavedPets);
 $('#clear').on('click',clearAllPets);
+$('#close-shop').on('click',closeShop);
+$('#shop-button').on('click',openShop);
