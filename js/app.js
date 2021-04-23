@@ -171,7 +171,6 @@ function increaseSleepiness() {
     Tamagotchi.player.sleepinessInterval=setInterval(()=>{
         if (Tamagotchi.player.sleepinessIntervalCheck) {
             Tamagotchi.player.sleepiness++;
-            console.log('increased sleepiness to '+Tamagotchi.player.sleepiness);
             updateSleepiness();
             if (Tamagotchi.player.sleepiness>10) {
                 endGame(0);
@@ -208,7 +207,6 @@ function feedPet() {
         $('#game-message').text(`${Tamagotchi.player.name} loves ${Tamagotchi.player.faveFood}!`);
         updateGameMessage();
         Tamagotchi.player.hunger--;
-        console.log(`decreased hunger to ${Tamagotchi.player.hunger}`);
         updateHunger();
         setTimeout(()=>{
             $('#feed-button').off();
@@ -625,6 +623,7 @@ function winCondition() {
         increaseHunger();
         increaseSleepiness();
         increaseBoredom();
+        updateAge();
         $('#game-message').text(`${Tamagotchi.player.name} looks really sad for some reason...`);
         updateGameMessage();
     });
@@ -633,6 +632,7 @@ function winCondition() {
         increaseHunger();
         increaseSleepiness();
         increaseBoredom();
+        updateAge();
         Tamagotchi.player.finalWinCheck=true;
         $('#game-message').text(`${Tamagotchi.player.name} winked at you for some reason...`);
         updateGameMessage();
@@ -661,7 +661,7 @@ function endGame(x) {
         document.getElementById('final-win').play();
         $('#end-message').text(`It's time to help ${Tamagotchi.player.name} escape!`);
         setTimeout(()=>{
-            $('#end-button').text('I\'m ready to escape!');
+            $('#end-button').text('I\'m ready!');
             $('#end-section').fadeIn();
             $('#end-button').on('click',()=>{
                 location.href='./maze.html';
