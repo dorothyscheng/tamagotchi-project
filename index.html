@@ -29,6 +29,7 @@
     <audio id="transition" src="./sounds/mixkit-fast-small-sweep-transition-166.wav"></audio>
     <audio id="game-over" src="./sounds/mixkit-retro-arcade-game-over-470.wav"></audio>
     <audio id="not-active" src="./sounds/mixkit-electronic-retro-block-hit-2185.wav"></audio>
+    <audio id="final-win" src="./sounds/mixkit-extra-bonus-in-a-video-game-2045.wav"></audio>
 </head>
 <body class="animate-color">
     <header id="header" class="header">
@@ -1186,12 +1187,21 @@
                         </div>
                     </div>
                 </div>
+                <div id="win-instructions-content" class="win-instructions-content">
+                    <span id="close-win-instructions" class="close">&times;</span>
+                    <h3 id="win-instructions-title" class="shop-title">There is a strange note in your purchase...</h3>
+                    <p id="pet-message" class="pet-message">This is <span id="insert-name"></span>. You've taken such good care of me, which is why I'm risking everything to communicate directly with you. I'm trapped in this world! Please help me escape.<br .>If you agree, you have 5 more age cycles (5 minutes from your perspective) to collect as many coins as you can. Then, we can break out together!<br /><span class="plea">Will you help me?</span></p>
+                    <div id="win-options" class="win-options">
+                        <button id="yes" class="win-option-button">Yes, of course!</button>
+                        <button id="no" class="win-option-button">No, you can stay here forever.</button>
+                    </div>
+                </div>
             </section>
         </section>
         <section id="end-section" class="end-section">
             <div id="end-container" class="end-container">
                 <h2 id="end-message" class="end-message"></h2>
-                <button id="reload-button" class="game-button">Start Over</button>
+                <button id="end-button" class="game-button"></button>
             </div>
         </section>
     </main>

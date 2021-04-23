@@ -2,7 +2,7 @@ class Tamagotchi {
     constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
-        this.coins=0;
+        this.coins=30;
         this.hunger=5;
         this.sleepiness=4;
         this.boredom=6;
@@ -17,10 +17,12 @@ class Tamagotchi {
         this.footColorIndex=foot;
         this.tailColorIndex=tail;
         this.backgroundIndex=background;
-        this.bed=false;
-        this.feeder=false;
-        this.toy=false;
+        this.bed=true;
+        this.feeder=true;
+        this.toy=true;
         this.hangman=false;
+        this.finalWinCheck=false;
+        this.finalWinCounter=0;
         Tamagotchi.player=this;
     }
     static player={};
@@ -64,6 +66,12 @@ function updateAge() {
         currentAge++;
         Tamagotchi.player.age=currentAge;
         ageText.text(currentAge);
+        if (player.finalWinCheck) {
+            Tamagotchi.player.finalWinCounter++;
+            if (Tamagotchi.player.finalWinCounter===5) {
+                endGame(1);
+            };
+        };
     },60000);
 };
 function updateCoins() {
@@ -144,7 +152,7 @@ function increaseHunger() {
             Tamagotchi.player.hunger++;
             updateHunger();
             if (Tamagotchi.player.hunger>10) {
-                endGame();
+                endGame(0);
             };
         },15000);
     } else {
@@ -152,7 +160,7 @@ function increaseHunger() {
             Tamagotchi.player.hunger++;
             updateHunger();
             if (Tamagotchi.player.hunger>10) {
-                endGame();
+                endGame(0);
             };
         },25000);
     }
@@ -166,7 +174,7 @@ function increaseSleepiness() {
             console.log('increased sleepiness to '+Tamagotchi.player.sleepiness);
             updateSleepiness();
             if (Tamagotchi.player.sleepiness>10) {
-                endGame();
+                endGame(0);
             };
         }
     },20000);
@@ -178,7 +186,7 @@ function increaseBoredom() {
             Tamagotchi.player.boredom++;
             updateBoredom();
             if (Tamagotchi.player.boredom>10) {
-                endGame();
+                endGame(0);
             };
         },10000);
     } else {
@@ -186,7 +194,7 @@ function increaseBoredom() {
             Tamagotchi.player.boredom++;
             updateBoredom();
             if (Tamagotchi.player.boredom>10) {
-                endGame();
+                endGame(0);
             };
         },20000);
     }
@@ -606,7 +614,31 @@ function backgroundPassThrough(e) {
         backgroundPicker(1);
     };
 }
-function endGame() {
+function winCondition() {
+    $('#shop-content').fadeOut();
+    $('#insert-name').text(`${Tamagotchi.player.name}`);
+    setTimeout(()=>{
+        $('#win-instructions-content').css('display','flex');
+    }, 1000);
+    $('#no').on('click',()=>{
+        $('#shop-section').fadeOut();
+        increaseHunger();
+        increaseSleepiness();
+        increaseBoredom();
+        $('#game-message').text(`${Tamagotchi.player.name} looks really sad for some reason...`);
+        updateGameMessage();
+    });
+    $('#yes').on('click',()=>{
+        $('#shop-section').fadeOut();
+        increaseHunger();
+        increaseSleepiness();
+        increaseBoredom();
+        Tamagotchi.player.finalWinCheck=true;
+        $('#game-message').text(`${Tamagotchi.player.name} winked at you for some reason...`);
+        updateGameMessage();
+    });
+};
+function endGame(x) {
     clearInterval(Tamagotchi.player.boredomInterval);
     clearInterval(Tamagotchi.player.hungerInterval);
     clearInterval(Tamagotchi.player.sleepinessInterval);
@@ -614,13 +646,28 @@ function endGame() {
     Tamagotchi.player.sleepinessIntervalCheck=false;
     clearInterval(Tamagotchi.player.ageInterval);
     $('#play-screen').fadeOut();
-    document.getElementById('game-over').play();
-    $('body').removeClass('animate-color');
-    $('#end-message').text(`${Tamagotchi.player.name} died from neglect...`);
-    setTimeout(()=>{
-        $('#end-section').fadeIn();
-        $('#reload-button').on('click',()=>location.reload());
-    },1000);
+    if (x===0) {
+        document.getElementById('game-over').play();
+        $('body').removeClass('animate-color');
+        $('#end-message').text(`${Tamagotchi.player.name} died from neglect...`);
+        setTimeout(()=>{
+            $('#end-button').text('Start Over');
+            $('#end-section').fadeIn();
+            $('#end-button').on('click',()=>location.reload());
+        },1000);
+    } else {
+        localStorage.setItem('finalPet',JSON.stringify(Tamagotchi.player));
+        $('body').removeClass('animate-color');
+        document.getElementById('final-win').play();
+        $('#end-message').text(`It's time to help ${Tamagotchi.player.name} escape!`);
+        setTimeout(()=>{
+            $('#end-button').text('I\'m ready to escape!');
+            $('#end-section').fadeIn();
+            $('#end-button').on('click',()=>{
+                location.href='./maze.html';
+            });
+        },1000);
+    };
 }
 // PET MOVEMENT
 function walkingRecursion() {
@@ -718,6 +765,7 @@ function openShop() {
         updateGameMessage();
     } else {
         $('#shop-section').fadeIn();
+        clearInterval(Tamagotchi.player.ageInterval)
         clearInterval(Tamagotchi.player.hungerInterval);
         clearInterval(Tamagotchi.player.boredomInterval);
         clearInterval(Tamagotchi.player.sleepinessInterval);
@@ -730,6 +778,7 @@ function closeShop() {
     increaseHunger();
     increaseSleepiness();
     increaseBoredom();
+    updateAge();
 }
 function buyItem(e) {
     const $selected=$(e.target);
@@ -766,8 +815,12 @@ function buyItem(e) {
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
         }
         updateCoins();
-    }
-}
+        if (Tamagotchi.player.toy && Tamagotchi.player.feeder && Tamagotchi.player.hangman && Tamagotchi.player.bed) {
+            $('#close-shop').off();
+            $('#close-shop').on('click',winCondition);
+        };
+    };
+};
 // EVENT LISTENERS
 $('#pet-name').on('click',()=>$('#pet-name').val(''));
 $('#fave-food').on('click',()=>$('#fave-food').val(''));

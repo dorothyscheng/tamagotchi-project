@@ -530,6 +530,37 @@ body {
     font-weight: bold;
     padding: 20px 0;
 }
+.win-instructions-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: #fff;
+    margin: 5% auto;
+    color: #000;
+}
+.pet-message {
+    margin: 5px 20px;
+    line-height: 30px;
+}
+.plea {
+    font-weight: bold;
+    font-size: 20px;
+}
+.win-options {
+    display: flex;
+    justify-content: space-evenly;
+}
+.win-option-button {
+    font-size: 20px;
+    color: #000;
+    width: 300px;
+    border: 4px solid transparent;
+}
+.win-option-button:hover {
+    color: #39ff14;
+    border: 4px solid #39ff14;
+}
 /* GAME END */
 .end-section {
     display: none;
@@ -550,7 +581,6 @@ body {
 }
 .filled {
     background-color: #39ff14;
-    opacity: .5;
 }
 .hide {
     opacity: 0;
@@ -601,6 +631,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.path {
+    background-color: #39ff14;
+    opacity: .5;
 }
 .top {
     border-top: 4px solid yellow;
