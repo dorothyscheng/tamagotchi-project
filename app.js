@@ -20,6 +20,7 @@ class Tamagotchi {
         this.bed=false;
         this.feeder=false;
         this.toy=false;
+        this.hangman=false;
         Tamagotchi.player=this;
     }
     static player={};
@@ -35,7 +36,7 @@ class Tamagotchi {
         'https://images.unsplash.com/photo-1611520474289-264fb8b502a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1916&q=80',
         'https://images.unsplash.com/photo-1611163647499-a2befbd8d25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80'
     ];
-    static words=['testing','swimming','mountains','snake','banana'];
+    static words=['whale','kitten','giraffe','monkey','penguin','buffalo','crane','stork','lion','tiger','bear','gorilla','dolphin','sheep','deer','elephant','bee','turtle','dog','spider','cricket','eagle','frog','iguana','crab','kangaroo','marmot','moose','moth','shark'];
     static bodyColorIndex=0;
     static footColorIndex=2;
     static tailColorIndex=1;
@@ -44,6 +45,7 @@ class Tamagotchi {
         bed:30,
         toy:20,
         feeder:20,
+        hangman:10,
     }
     static hangmanGame={
         displayWord: [],
@@ -498,6 +500,11 @@ function startGame() {
         $('#feeder').addClass('purchased');
         $('#feeder-icon').addClass('reveal');
     };
+    if (player.hangman) {
+        $('#hangman').addClass('purchased');
+        $('#hangman-button').show();
+        $('#rps-button').text('Play Rock, Paper, Scissors');
+    }
     setTimeout(()=>{
         $('#play-screen').fadeIn();
         updateCoins();
@@ -732,9 +739,16 @@ function buyItem(e) {
             $('#feeder').addClass('purchased');
             $('#feeder-icon').addClass('reveal');
             document.getElementById('get-item').play();
+        } else if (id==='hangman' && Tamagotchi.player.coins>=Tamagotchi.shopPrices.hangman) {
+            Tamagotchi.player.hangman=true;
+            Tamagotchi.player.coins-=Tamagotchi.shopPrices.hangman;
+            $('#hangman').addClass('purchased');
+            $('#hangman-button').show();
+            $('#rps-button').text('Play Rock, Paper, Scissors');
+            document.getElementById('get-item').play();
         } else {
             document.getElementById('not-active').play();
-            $('#shop-title').text(`You can't afford the pet ${id}.`);
+            $('#shop-title').text(`You can't afford this item.`);
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
         }
         updateCoins();
