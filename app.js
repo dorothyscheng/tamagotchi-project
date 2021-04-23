@@ -229,8 +229,10 @@ function toggleLights() {
         $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
         $('#feed-button').off();
         $('#rps-button').off();
+        $('#hangman-button').off();
         $('#feed-button').on('click',feedPet);
         $('#rps-button').on('click',toggleRPS);
+        $('#hangman-button').on('click',toggleHangman);
         clearInterval(Tamagotchi.player.sleepingInterval);
         setTimeout(()=>{
             if (!Tamagotchi.player.sleepinessIntervalCheck) {
@@ -253,8 +255,10 @@ function sleep() {
         $('.pet').addClass('hide');
         $('#feed-button').off();
         $('#rps-button').off();
+        $('#hangman-button').off();
         $('#feed-button').on('click',sleepMessage);
         $('#rps-button').on('click',sleepMessage);
+        $('#hangman-button').on('click',sleepMessage);
         if (!Tamagotchi.player.bed) {
             Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
@@ -290,13 +294,17 @@ function toggleRPS() {
         $('#rps-container').slideUp();
         $('#feed-button').off();
         $('#lights-button').off();
+        $('#hangman-button').off();
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
+        $('#hangman-button').on('click',toggleHangman);
     } else {
         $('#feed-button').off();
         $('#lights-button').off();
+        $('#hangman-button').off();
         $('#feed-button').on('click',()=>document.getElementById('not-active').play());
         $('#lights-button').on('click',()=>document.getElementById('not-active').play());
+        $('#hangman-button').on('click',()=>document.getElementById('not-active').play());
         playRPS();
     };
 }
@@ -384,6 +392,8 @@ function decreaseBoredom() {
     updateBoredom();
 };
 function resolveHangmanGuess(e) {
+    $('#hangman-button').off();
+    $('#hangman-button').on('click',()=>document.getElementById('not-active').play());
     const letterOptions="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     // // source for extracting value from keydown: https://stackoverflow.com/questions/2220196/how-to-decode-character-pressed-from-jquerys-keydowns-event-handler/13127566
     const guess=String.fromCharCode(e.which).toLowerCase();
@@ -408,7 +418,7 @@ function resolveHangmanGuess(e) {
             for (let i=0; i<Tamagotchi.hangmanGame.strikes; i++) {
                 $strikes.eq(i).addClass('filled');
             };
-            if (Tamagotchi.hangmanGame.strikes>=3) {
+            if (Tamagotchi.hangmanGame.strikes>=10) {
                 endHangman(0);
             } else {
                 $(document).on('keydown',resolveHangmanGuess);
@@ -446,6 +456,8 @@ function toggleHangman() {
         $('#hangman-container').slideUp();
         $('#feed-button').off();
         $('#lights-button').off();
+        $('#rps-button').off();
+        $('#rps-button').on('click',toggleRPS);
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
         Tamagotchi.hangmanGame.currentWord='';
@@ -455,6 +467,8 @@ function toggleHangman() {
     } else {
         $('#feed-button').off();
         $('#lights-button').off();
+        $('#rps-button').off();
+        $('#rps-button').on('click',()=>document.getElementById('not-active').play());
         $('#feed-button').on('click',()=>document.getElementById('not-active').play());
         $('#lights-button').on('click',()=>document.getElementById('not-active').play());
         playHangman();

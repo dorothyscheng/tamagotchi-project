@@ -563,7 +563,8 @@ body {
 .purchased {
     opacity: .5;
     cursor: default;
+    border: 4px solid #000;
 }
 .purchased:hover {
-    border: 4px solid transparent;
+    border: 4px solid #000;
 }
