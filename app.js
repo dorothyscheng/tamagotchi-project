@@ -35,6 +35,7 @@ class Tamagotchi {
         'https://images.unsplash.com/photo-1611520474289-264fb8b502a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1916&q=80',
         'https://images.unsplash.com/photo-1611163647499-a2befbd8d25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80'
     ];
+    static words=['testing','swimming','mountains','snake','banana'];
     static bodyColorIndex=0;
     static footColorIndex=2;
     static tailColorIndex=1;
@@ -43,6 +44,11 @@ class Tamagotchi {
         bed:30,
         toy:20,
         feeder:20,
+    }
+    static hangmanGame={
+        displayWord: [],
+        currentWord:'',
+        strikes:0,
     }
 }
 // UPDATE DISPLAYS
@@ -220,9 +226,9 @@ function toggleLights() {
         $('.pet').removeClass('hide');
         $('#pet-section').css('background-image',`url(${Tamagotchi.backgrounds[player.backgroundIndex]})`);
         $('#feed-button').off();
-        $('#play-button').off();
+        $('#rps-button').off();
         $('#feed-button').on('click',feedPet);
-        $('#play-button').on('click',togglePlay);
+        $('#rps-button').on('click',toggleRPS);
         clearInterval(Tamagotchi.player.sleepingInterval);
         setTimeout(()=>{
             if (!Tamagotchi.player.sleepinessIntervalCheck) {
@@ -244,9 +250,9 @@ function sleep() {
         document.getElementById('sleeping-sound').play();
         $('.pet').addClass('hide');
         $('#feed-button').off();
-        $('#play-button').off();
+        $('#rps-button').off();
         $('#feed-button').on('click',sleepMessage);
-        $('#play-button').on('click',sleepMessage);
+        $('#rps-button').on('click',sleepMessage);
         if (!Tamagotchi.player.bed) {
             Tamagotchi.player.sleepingInterval=setInterval(()=>{
                 Tamagotchi.player.sleepiness--;
@@ -275,10 +281,10 @@ function sleep() {
         updateGameMessage();
     };
 }
-function togglePlay() {
-    const $playButton=$('#play-button');
-    $playButton.toggleClass('play-on');
-    if (!$playButton.hasClass('play-on')) {
+function toggleRPS() {
+    const $rpsButton=$('#rps-button');
+    $rpsButton.toggleClass('play-on');
+    if (!$rpsButton.hasClass('play-on')) {
         $('#rps-container').slideUp();
         $('#feed-button').off();
         $('#lights-button').off();
@@ -314,12 +320,12 @@ function playRPS() {
         $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
         document.getElementById('not-active').play();
         updateGameMessage();
-        togglePlay();
+        toggleRPS();
     };
 };
 function resolveRPS(e) {
-    $('#play-button').off();
-    $('#play-button').on('click',()=>document.getElementById('not-active').play());
+    $('#rps-button').off();
+    $('#rps-button').on('click',()=>document.getElementById('not-active').play());
     $('.rps-image').off();
     const playerChoice=$(e.target).attr('id');
     const petChoice=$('#pet-choice-text').text().toLowerCase();
@@ -362,11 +368,11 @@ function resolveRPS(e) {
     decreaseBoredom();
     updateCoins();
     setTimeout(()=>{
-        togglePlay();
+        toggleRPS();
     },2000);
     setTimeout(()=>{
-        $('#play-button').off();
-        $('#play-button').on('click',togglePlay);
+        $('#rps-button').off();
+        $('#rps-button').on('click',toggleRPS);
         $('#pet-choice').toggleClass('reveal');
         $rpsMessage.text('Click to play');
     },2200);
@@ -374,6 +380,100 @@ function resolveRPS(e) {
 function decreaseBoredom() {
     Tamagotchi.player.boredom--;
     updateBoredom();
+};
+function resolveHangmanGuess(e) {
+    const letterOptions="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // // source for extracting value from keydown: https://stackoverflow.com/questions/2220196/how-to-decode-character-pressed-from-jquerys-keydowns-event-handler/13127566
+    const guess=String.fromCharCode(e.which).toLowerCase();
+    const word=Tamagotchi.hangmanGame.currentWord;
+    if (letterOptions.includes(guess.toUpperCase())) {
+        $(document).off('keydown',resolveHangmanGuess);
+        if (word.includes(guess)) {
+            for (let i=0; i<word.length; i++) {
+                if (guess===word.charAt(i)) {
+                    Tamagotchi.hangmanGame.displayWord[i]=guess;
+                    $('#display-word').text(Tamagotchi.hangmanGame.displayWord.join(' '));
+                };
+            };
+            if (Tamagotchi.hangmanGame.displayWord.join('')===word) {
+                endHangman(1);
+            } else {
+                $(document).on('keydown',resolveHangmanGuess);
+            };
+        } else {
+            Tamagotchi.hangmanGame.strikes++;
+            const $strikes=$('.strike');
+            for (let i=0; i<Tamagotchi.hangmanGame.strikes; i++) {
+                $strikes.eq(i).addClass('filled');
+            };
+            if (Tamagotchi.hangmanGame.strikes>=3) {
+                endHangman(0);
+            } else {
+                $(document).on('keydown',resolveHangmanGuess);
+            };
+        };
+    };
+};
+function endHangman(x) {
+    if (x===0) {
+        $('#hangman-message').text('You lost!');
+        document.getElementById('coin-loss').play();
+        Tamagotchi.player.coins-=2;
+    } else {
+        $('#hangman-message').text('You won!');
+        document.getElementById('coin-sound').play();
+        Tamagotchi.player.coins+=4;
+    }
+    decreaseBoredom();
+    updateCoins();
+    setTimeout(()=>{
+        toggleHangman();
+    },2000);
+    setTimeout(()=>{
+        $('#hangman-button').off();
+        $('#hangman-button').on('click',toggleHangman);
+        $('#hangman-message').text('Press a key to guess that letter');
+        $('#display-word').text('');
+        $('.strike').removeClass('filled');
+    },2500);
+}
+function toggleHangman() {
+    const $hangmanButton=$('#hangman-button');
+    $hangmanButton.toggleClass('play-on');
+    if (!$hangmanButton.hasClass('play-on')) {
+        $('#hangman-container').slideUp();
+        $('#feed-button').off();
+        $('#lights-button').off();
+        $('#feed-button').on('click',feedPet);
+        $('#lights-button').on('click',toggleLights);
+        Tamagotchi.hangmanGame.currentWord='';
+        Tamagotchi.hangmanGame.displayWord=[];
+        Tamagotchi.hangmanGame.strikes=0;
+        $('#display-word').text('');
+    } else {
+        $('#feed-button').off();
+        $('#lights-button').off();
+        $('#feed-button').on('click',()=>document.getElementById('not-active').play());
+        $('#lights-button').on('click',()=>document.getElementById('not-active').play());
+        playHangman();
+    };
+};
+function playHangman() {
+    if (Tamagotchi.player.boredom>0) {
+        const currentWord=Tamagotchi.words[Math.floor(Math.random()*Tamagotchi.words.length)];
+        Tamagotchi.hangmanGame.currentWord=currentWord;
+        for (let i=0; i<currentWord.length; i++) {
+            Tamagotchi.hangmanGame.displayWord.push('_');
+        }
+        $('#display-word').text(Tamagotchi.hangmanGame.displayWord.join(' '));
+        document.getElementById('transition').play();
+        $('#hangman-container').slideDown();
+        $(document).on('keydown',resolveHangmanGuess);
+    } else {
+        $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
+        document.getElementById('not-active').play();
+        updateGameMessage();
+    }
 };
 // GAME CREATION FUNCTIONS
 function startGame() {
@@ -410,7 +510,7 @@ function startGame() {
         increaseSleepiness();
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
-        $('#play-button').on('click',togglePlay);
+        $('#rps-button').on('click',toggleRPS);
         setTimeout(walkingRecursion,15000);
     },1000);
 };
@@ -489,6 +589,7 @@ function endGame() {
     clearInterval(Tamagotchi.player.boredomInterval);
     clearInterval(Tamagotchi.player.hungerInterval);
     clearInterval(Tamagotchi.player.sleepinessInterval);
+    clearInterval(Tamagotchi.player.sleepingInterval);
     Tamagotchi.player.sleepinessIntervalCheck=false;
     clearInterval(Tamagotchi.player.ageInterval);
     $('#play-screen').fadeOut();
@@ -632,6 +733,7 @@ function buyItem(e) {
             $('#feeder-icon').addClass('reveal');
             document.getElementById('get-item').play();
         } else {
+            document.getElementById('not-active').play();
             $('#shop-title').text(`You can't afford the pet ${id}.`);
             setTimeout(()=>$('#shop-title').text('Buy items that enhance your pet\'s life!'),2000);
         }
@@ -660,3 +762,4 @@ $('#load-saved').on('click',viewSavedPets);
 $('#clear').on('click',clearAllPets);
 $('#close-shop').on('click',closeShop);
 $('#shop-button').on('click',openShop);
+$('#hangman-button').on('click',toggleHangman);

@@ -401,6 +401,7 @@
                     </div>
                 </div>
             </section>
+            <h2 id="game-message" class="game-message"></h2>
             <section id="pet-section" class="pet-section">
                 <div id="pet-images" class="pet-images walking">
                     <div id="pet-behind" class="pet behind">
@@ -1096,14 +1097,14 @@
                         <!-- </div> -->
                     </div>
                 </div>
-                <section id="rps-container" class="rps-container">
+                <section id="rps-container" class="game-container">
                     <div id="rps" class="rps">
                         <div id="pet-choice" class="pet-choice">
                             <p id="pet-choice-header" class="pet-choice-header"></p>
                             <img src="" alt="" id="pet-choice-image" class="rps-image">
                             <p id="pet-choice-text" class="option-text"></p>
                         </div>
-                        <p id="rps-message" class="rps-message">Click to play</p>
+                        <p id="rps-message" class="play-message">Click to play</p>
                         <div id="player-choice-div" class="player-choice-div">
                             <div id="rock-div" class="player-option">
                                 <img src="https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cm9ja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="rock" id="rock" class="rps-image" />
@@ -1120,12 +1121,28 @@
                         </div>
                     </div>
                 </section>
+                <section id="hangman-container" class="game-container">
+                    <div id="hangman" class="game">
+                        <p id="hangman-message" class="play-message">Press a key to guess that letter</p>
+                        <p id="display-word" class="play-message"></p>
+                        <div id="strike-container" class="strike-container">
+                            <div id="strike-images" class="strike-images">
+                                <div id="strike-one" class="strike"></div>
+                                <div id="strike-two" class="strike"></div>
+                                <div id="strike-three" class="strike"></div>
+                            </div>
+                            <p id="strike-text" class="play-message">Strikes</p>
+                        </div>
+                    </div>
+                </section>
             </section>
-            <h2 id="game-message" class="game-message"></h2>
             <section id="action-section" class="action-section">
                 <button id="feed-button" class="action-button">Feed Me</button>
                 <button id="lights-button" class="action-button">Lights <span id="lights-indicator">Off</span></button>
-                <button id="play-button" class="action-button">Play with Me</button>
+                <div id="play-div" class="play-div">
+                    <button id="hangman-button" class="action-button">Hangman</button>
+                    <button id="rps-button" class="action-button">Play with Me</button>
+                </div>
             </section>
             <section id="save-section" class="save-section">
                 <button id="shop-button" class="game-button">Go to Shop</button>
