@@ -277,7 +277,6 @@ function togglePlay() {
         $('#feed-button').on('click',feedPet);
         $('#lights-button').on('click',toggleLights);
     } else {
-        document.getElementById('transition').play();
         $('#feed-button').off();
         $('#lights-button').off();
         playRPS();
@@ -298,6 +297,7 @@ function playRPS() {
         $petChoiceImage.attr('alt',petChoice.object);
         $petChoiceText.text(petChoice.object);
         $petChoiceHeader.text(`${Tamagotchi.player.name} picked:`);
+        document.getElementById('transition').play();
         $('#rps-container').slideDown();
         $('.rps-image').on('click',resolveRPS);
     } else {
