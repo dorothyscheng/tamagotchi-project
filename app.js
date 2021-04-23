@@ -592,6 +592,7 @@ function deleteSinglePet(e) {
 function openShop() {
     if ($('#pet-section').hasClass('lights-off')) {
         $('#game-message').text('Turn on the lights to access the shop');
+        document.getElementById('not-active').play();
         updateGameMessage();
     } else {
         $('#shop-section').fadeIn();
