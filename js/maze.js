@@ -1,15 +1,4 @@
-const player = {
-    petName: 'placeholder',
-    coins:0,
-    faveFood:'food',
-    bodyColor: 'body',
-    tailColor: 'tail',
-    footColor: 'foot',
-}
-
-// const $target=$('.target');
-
-$(document).on('keydown',move);
+const colors=['#000000','#ffffff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066','#0D2B73','#D4D7DE','#24781B'];
 function move(e) {
     const $target=$('.target');
     const alpha="abcdefghijklmnopqrst";
@@ -71,7 +60,9 @@ function move(e) {
     const nextId=nextColumn+nextRow;
     if (validityCheck) {
         $currentCell.removeClass('target');
+        $currentCell.empty();
         $(`#${nextId}`).addClass('target');
+        movePlayer();
         if ($(`#${nextId}`).hasClass('end')) {
             winMaze();
         }
@@ -80,9 +71,36 @@ function move(e) {
     }
 }
 function invalidMove() {
-    document.getElementById('not-active').play();
+    const sound = document.getElementById('not-active');
+    sound.pause();
+    sound.currentTime=0;
+    sound.play();
+    // document.getElementById('not-active').play();
 }
 function winMaze() {
     console.log('you won!');
     $(document).off('keydown',move);
 }
+function movePlayer() {
+    const player=JSON.parse(localStorage.getItem('finalPet'));
+    $('.target').append('<i id="player" class="fas fa-cat"></i>');
+    if (player.bodyColorIndex!==0) {
+        $('#player').css('color',colors[player.bodyColorIndex]);
+    } else if (player.footColorIndex!==0) {
+        $('#player').css('color',colors[player.footColorIndex]);
+    } else if (player.tailColorIndex!==0) {
+        $('#player').css('color',colors[player.tailColorIndex]);
+    } else {
+        $('#player').css('color','#000');
+    };
+};
+function startMaze() {
+    const player=JSON.parse(localStorage.getItem('finalPet'));
+    movePlayer();
+    setTimeout(()=>$('#end-img').fadeOut(),3000);
+    setTimeout(()=>{
+        $('#main').fadeIn();
+        $(document).on('keydown',move);
+    },4000);
+};
+startMaze();

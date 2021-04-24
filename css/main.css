@@ -541,18 +541,23 @@ body {
 }
 .pet-message {
     margin: 5px 20px;
-    line-height: 30px;
+    line-height: 41px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 25px;
 }
 .plea {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
+    font-family: 'Gloria Hallelujah', cursive;
 }
 .win-options {
     display: flex;
     justify-content: space-evenly;
 }
 .win-option-button {
-    font-size: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: bold;
+    font-size: 25px;
     color: #000;
     width: 300px;
     border: 4px solid transparent;
@@ -600,12 +605,29 @@ body {
     border: 4px solid #000;
 }
 /* MAZE */
+.maze-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.main-maze {
+    display: none;
+}
+.maze-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gloria Hallelujah', cursive;
+}
 .instructions {
     text-align: center;
     margin-bottom: 5px;
+    font-family: 'Gloria Hallelujah', cursive;
 }
 .maze-container {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -620,9 +642,13 @@ body {
     border-right: 1px solid yellow;
 }
 .maze-cell {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     width: 50px;
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
 }
 .maze-number {
     border: 1px solid white;
@@ -632,25 +658,56 @@ body {
     align-items: center;
     justify-content: center;
 }
-.path {
+/* .path {
     background-color: #39ff14;
     opacity: .5;
-}
+} */
 .top {
-    border-top: 4px solid yellow;
+    border-top: 1px solid yellow;
 }
 .right {
-    border-right: 4px solid yellow;
+    border-right: 1px solid yellow;
 }
 .bottom {
-    border-bottom: 4px solid yellow;
+    border-bottom: 1px solid yellow;
 }
 .left {
-    border-left: 4px solid yellow;
-}
-.target {
-    background-color: red;
+    border-left: 1px solid yellow;
 }
 .end {
     background-color: blue;
+}
+.fa-cat {
+    font-size: 40px;
+}
+.fa-sun {
+    color: yellow;
+    font-size: 40px;
+}
+.end {
+    background-color: turquoise;
+}
+.goal {
+    /* background-color: turquoise; */
+    animation: end 5s infinite;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    /* font-size: 500px; */
+}
+@keyframes end {
+    0% {
+        width: 100px;
+    }
+    50% {
+        width: 120px;
+        height: 120px;
+    }
+    100% {
+        width: 100px;
+    }
 }

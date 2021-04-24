@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <!-- Main CSS -->
     <link rel="stylesheet" href="./css/main.css">
     <!-- JQUERY -->
@@ -21,11 +25,12 @@
     <audio id="not-active" src="./sounds/mixkit-electronic-retro-block-hit-2185.wav"></audio>
 </head>
 <body>
-    <header class="header">
-        <h1 id="maze-title" class="maze-title">Help your pet escape!</h1>
+    <header class="maze-header">
+        <h1 id="maze-title" class="maze-title">I think this is the way out! Can you help me get there?</h1>
+        <div id="end-img" class="goal end"><i class="fas fa-sun"></i></div>
     </header>
-    <main id="main" class="main">
-        <h2 id="instructions" class="instructions">Use the arrow keys to guide your pet to freedom!</h2>
+    <main id="main" class="main-maze">
+        <h2 id="instructions" class="instructions">Use your arrow keys to move</h2>
         <div id="maze-container" class="maze-container">
             <div class="maze-column">
                 <div class="maze-number"></div>
@@ -113,7 +118,7 @@
                 <div id="d6" class="maze-cell top right"></div>
                 <div id="d7" class="maze-cell path"></div>
                 <div id="d8" class="maze-cell bottom path"></div>
-                <div id="d9" class="maze-cell top bottom"></div>
+                <div id="d9" class="maze-cell top bottom right"></div>
                 <div id="d10" class="maze-cell top bottom path"></div>
                 <div id="d11" class="maze-cell top"></div>
                 <div id="d12" class="maze-cell left"></div>
@@ -132,7 +137,7 @@
                 <div id="e6" class="maze-cell left"></div>
                 <div id="e7" class="maze-cell bottom"></div>
                 <div id="e8" class="maze-cell top right path"></div>
-                <div id="e9" class="maze-cell right path"></div>
+                <div id="e9" class="maze-cell right path left"></div>
                 <div id="e10" class="maze-cell right bottom path"></div>
                 <div id="e11" class="maze-cell right top"></div>
                 <div id="e12" class="maze-cell bottom"></div>
@@ -352,7 +357,7 @@
             </div>
             <div class="maze-column">
                 <div class="maze-number">Q</div>
-                <div id="q1" class="maze-cell end path"></div>
+                <div id="q1" class="maze-cell end path"><i class="fas fa-sun"></i></div>
                 <div id="q2" class="maze-cell path"></div>
                 <div id="q3" class="maze-cell path"></div>
                 <div id="q4" class="maze-cell path"></div>
