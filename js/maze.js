@@ -86,13 +86,26 @@ function invalidMove() {
 function endMaze(x) {
     clearInterval(player.mazeInterval);
     $(document).off('keydown',move);
+    $('#maze-section').fadeOut();
+    $('#maze-intro').fadeOut();
+    $('.foot-fill').css('background-color',colors[player.footColorIndex]);
+    $('.pet-fill').css('background-color',colors[player.bodyColorIndex]);
+    $('.tail-fill').css('background-color',colors[player.tailColorIndex]);
     if (x===0) {
         document.getElementById('game-over').play();
-        console.log('you lose');
+        $('#final-game-message').text(`You were caught trying to sneak out and ${player.name} was captured.`)
+        $('#pet-img').addClass('lose');
+        setTimeout(()=>{
+            $('#pet-img').fadeIn();
+        },2000);
     } else {
         document.getElementById('final-win').play();
-        console.log('you won!');
-    }
+        $('#final-game-message').text(`You made it! ${player.name} is free!`)
+        $('#pet-img').addClass('win');
+        setTimeout(()=>{
+            $('#pet-img').fadeIn();
+        },2000);
+    };
 }
 function movePlayer() {
     $('.target').append('<i id="player" class="fas fa-cat"></i>');
