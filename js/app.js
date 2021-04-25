@@ -661,7 +661,7 @@ function endGame(x) {
         localStorage.setItem('finalPet',JSON.stringify(Tamagotchi.player));
         $('body').removeClass('animate-color');
         document.getElementById('timer-sound').play();
-        $('#end-message').text(`It's time to help ${Tamagotchi.player.name} escape!`);
+        $('#end-message').text(`It's time to help ${Tamagotchi.player.name} escape! You bribed the guard with your coins, but you still have limited time.`);
         setTimeout(()=>{
             $('#end-button').text('I\'m ready!');
             $('#end-section').fadeIn();

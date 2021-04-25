@@ -25,13 +25,12 @@
     <audio id="not-active" src="./sounds/mixkit-electronic-retro-block-hit-2185.wav"></audio>
     <audio id="game-over" src="./sounds/mixkit-retro-arcade-game-over-470.wav"></audio>
     <audio id="final-win" src="./sounds/mixkit-bonus-extra-in-a-video-game-2064.wav"></audio>
-    <audio id="countdown" src="./sounds/mixkit-simple-countdown-922.wav"></audio>
     <audio id="alert" src="./sounds/mixkit-censorship-beep-1082.wav"></audio>
 </head>
 <body>
     <header class="maze-header">
         <section id="maze-intro" class="maze-intro">
-            <h1 id="maze-title" class="maze-title">I think I found the way out, but we don't have much time. I bribed the guard to give us some extra time with the coins you earned.<br />A wrong move will draw attention to us faster.</h1>
+            <h1 id="maze-title" class="maze-title">I think I found the way out!</h1>
             <div id="maze-timer" class="maze-timer">
                 <h2 id="timer-title" class="timer-title">Time Remaining: <span id="timer-count" class="timer-count"></span></h2>
             </div>
@@ -40,29 +39,9 @@
     </header>
     <main id="main" class="main-maze">
         <section id="maze-section" class="maze-section">
-            <h2 id="instructions" class="instructions">Use your arrow keys to move</h2>
+            <h2 id="instructions" class="instructions">Use your arrow keys to move. A wrong move detracts from your remaining time.</h2>
             <div id="maze-container" class="maze-container">
-                <!-- <div class="maze-column">
-                    <div class="maze-number"></div>
-                    <div class="maze-number">1</div>
-                    <div class="maze-number">2</div>
-                    <div class="maze-number">3</div>
-                    <div class="maze-number">4</div>
-                    <div class="maze-number">5</div>
-                    <div class="maze-number">6</div>
-                    <div class="maze-number">7</div>
-                    <div class="maze-number">8</div>
-                    <div class="maze-number">9</div>
-                    <div class="maze-number">10</div>
-                    <div class="maze-number">11</div>
-                    <div class="maze-number">12</div>
-                    <div class="maze-number">13</div>
-                    <div class="maze-number">14</div>
-                    <div class="maze-number">15</div>
-                    <div class="maze-number">16</div>
-                </div> -->
                 <div class="maze-column column-A">
-                    <!-- <div class="maze-number">A</div> -->
                     <div id="a1" class="maze-cell top"></div>
                     <div id="a2" class="maze-cell path"></div>
                     <div id="a3" class="maze-cell right path"></div>
@@ -81,7 +60,6 @@
                     <div id="a16" class="maze-cell right bottom"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">B</div> -->
                     <div id="b1" class="maze-cell top bottom"></div>
                     <div id="b2" class="maze-cell path bottom top"></div>
                     <div id="b3" class="maze-cell left top right"></div>
@@ -100,7 +78,6 @@
                     <div id="b16" class="maze-cell bottom right left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">C</div> -->
                     <div id="c1" class="maze-cell top right bottom"></div>
                     <div id="c2" class="maze-cell path top bottom"></div>
                     <div id="c3" class="maze-cell left top"></div>
@@ -119,7 +96,6 @@
                     <div id="c16" class="maze-cell bottom left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">D</div> -->
                     <div id="d1" class="maze-cell top left"></div>
                     <div id="d2" class="maze-cell path bottom"></div>
                     <div id="d3" class="maze-cell bottom top"></div>
@@ -138,7 +114,6 @@
                     <div id="d16" class="maze-cell bottom top right"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">E</div> -->
                     <div id="e1" class="maze-cell top bottom right"></div>
                     <div id="e2" class="maze-cell path right top"></div>
                     <div id="e3" class="maze-cell path bottom"></div>
@@ -157,7 +132,6 @@
                     <div id="e16" class="maze-cell bottom right left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">F</div> -->
                     <div id="f1" class="maze-cell top left"></div>
                     <div id="f2" class="maze-cell right left"></div>
                     <div id="f3" class="maze-cell path"></div>
@@ -176,7 +150,6 @@
                     <div id="f16" class="maze-cell bottom left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">G</div> -->
                     <div id="g1" class="maze-cell top bottom"></div>
                     <div id="g2" class="maze-cell top bottom left"></div>
                     <div id="g3" class="maze-cell top bottom"></div>
@@ -195,7 +168,6 @@
                     <div id="g16" class="maze-cell bottom start target"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">H</div> -->
                     <div id="h1" class="maze-cell top"></div>
                     <div id="h2" class="maze-cell bottom"></div>
                     <div id="h3" class="maze-cell bottom top"></div>
@@ -214,7 +186,6 @@
                     <div id="h16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">I</div> -->
                     <div id="i1" class="maze-cell top bottom"></div>
                     <div id="i2" class="maze-cell top right"></div>
                     <div id="i3" class="maze-cell right"></div>
@@ -233,7 +204,6 @@
                     <div id="i16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">J</div> -->
                     <div id="j1" class="maze-cell top right"></div>
                     <div id="j2" class="maze-cell right left"></div>
                     <div id="j3" class="maze-cell left bottom"></div>
@@ -252,7 +222,6 @@
                     <div id="j16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">K</div> -->
                     <div id="k1" class="maze-cell top left"></div>
                     <div id="k2" class="maze-cell bottom left"></div>
                     <div id="k3" class="maze-cell bottom top right"></div>
@@ -271,7 +240,6 @@
                     <div id="k16" class="maze-cell bottom right"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">L</div> -->
                     <div id="l1" class="maze-cell top bottom"></div>
                     <div id="l2" class="maze-cell top right"></div>
                     <div id="l3" class="maze-cell right left"></div>
@@ -290,7 +258,6 @@
                     <div id="l16" class="maze-cell bottom left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">M</div> -->
                     <div id="m1" class="maze-cell top"></div>
                     <div id="m2" class="maze-cell right bottom left"></div>
                     <div id="m3" class="maze-cell top left"></div>
@@ -309,7 +276,6 @@
                     <div id="m16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">N</div> -->
                     <div id="n1" class="maze-cell top bottom"></div>
                     <div id="n2" class="maze-cell left bottom top"></div>
                     <div id="n3" class="maze-cell right top"></div>
@@ -328,7 +294,6 @@
                     <div id="n16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">O</div> -->
                     <div id="o1" class="maze-cell top right bottom"></div>
                     <div id="o2" class="maze-cell right top"></div>
                     <div id="o3" class="maze-cell left bottom"></div>
@@ -347,7 +312,6 @@
                     <div id="o16" class="maze-cell bottom"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">P</div> -->
                     <div id="p1" class="maze-cell top left"></div>
                     <div id="p2" class="maze-cell left right"></div>
                     <div id="p3" class="maze-cell right bottom"></div>
@@ -366,7 +330,6 @@
                     <div id="p16" class="maze-cell bottom top"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">Q</div> -->
                     <div id="q1" class="maze-cell top end path"><i class="fas fa-sun"></i></div>
                     <div id="q2" class="maze-cell path right left"></div>
                     <div id="q3" class="maze-cell right left path"></div>
@@ -385,7 +348,6 @@
                     <div id="q16" class="maze-cell bottom right"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">R</div> -->
                     <div id="r1" class="maze-cell top bottom"></div>
                     <div id="r2" class="maze-cell left top"></div>
                     <div id="r3" class="maze-cell left right"></div>
@@ -404,7 +366,6 @@
                     <div id="r16" class="maze-cell bottom left"></div>
                 </div>
                 <div class="maze-column">
-                    <!-- <div class="maze-number">S</div> -->
                     <div id="s1" class="maze-cell top bottom"></div>
                     <div id="s2" class="maze-cell top right"></div>
                     <div id="s3" class="maze-cell left"></div>
@@ -423,7 +384,6 @@
                     <div id="s16" class="maze-cell bottom right"></div>
                 </div>
                 <div class="maze-column column-T">
-                    <!-- <div class="maze-number">T</div> -->
                     <div id="t1" class="maze-cell top"></div>
                     <div id="t2" class="maze-cell bottom left"></div>
                     <div id="t3" class="maze-cell top bottom"></div>
@@ -441,359 +401,353 @@
                     <div id="t15" class="maze-cell left"></div>
                     <div id="t16" class="maze-cell bottom left"></div>
                 </div>
-                
-                
             </div>
         </section>
         <section id="pet-img" class="pet-img">
             <h2 id="final-game-message" class="final-game-message"></h2>
             <div id="pet-sitting" class="pet">
-                <!-- <div id="head" class="head"> -->
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell eye-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell eye-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                <!-- </div> -->
-                <!-- <div id="body" class="body"> -->
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell tail-top tail-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell tail-animate tail-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-right pet-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-right foot-fill"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-right foot-fill"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell pet-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-right foot-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                    <div class="pet-row">
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-right foot-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell pet-left foot-fill"></div>
-                        <div class="pet-cell foot-fill"></div>
-                        <div class="pet-cell pet-right foot-fill"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                        <div class="pet-cell"></div>
-                    </div>
-                <!-- </div> -->
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell eye-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell eye-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell tail-top tail-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell tail-animate tail-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-right pet-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-right foot-fill"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-right foot-fill"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell pet-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-right foot-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
+                <div class="pet-row">
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-right foot-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell pet-left foot-fill"></div>
+                    <div class="pet-cell foot-fill"></div>
+                    <div class="pet-cell pet-right foot-fill"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                    <div class="pet-cell"></div>
+                </div>
             </div>
         </section>
     </main>

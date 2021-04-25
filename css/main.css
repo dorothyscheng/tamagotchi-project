@@ -605,23 +605,15 @@ body {
     justify-content: center;
     flex-direction: column;
 }
+.maze-intro {
+    margin-top: 36px;
+}
 .maze-section {
     display: none;
 }
-.maze-intro {
-    display: flex;
-    justify-content: space-evenly;
-    max-width: 1000px;
-    align-items: center;
-}
 .maze-timer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: none;
     text-align: center;
-    opacity: 0;
-    transition: opacity 1s;
 }
 .maze-title {
     display: flex;
@@ -633,7 +625,7 @@ body {
 .instructions {
     text-align: center;
     margin-bottom: 5px;
-    font-family: 'Gloria Hallelujah', cursive;
+    margin-top: 10px;
 }
 .maze-container {
     display: flex;
@@ -651,7 +643,6 @@ body {
     border-right: 1px solid yellow;
 }
 .maze-cell {
-    /* border: 1px solid white; */
     width: 50px;
     height: 50px;
     display: flex;
@@ -659,18 +650,6 @@ body {
     align-items: center;
     background-color: #000;
 }
-/* .maze-number {
-    border: 1px solid white;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-/* .path {
-    background-color: #39ff14;
-    opacity: .5;
-} */
 .top {
     border-top: 1px solid yellow;
 }
@@ -731,14 +710,16 @@ body {
     display: none;
     background-repeat: no-repeat;
     background-size: cover;
-    /* flex-direction: column;
-    align-items: center; */
     width: 100%;
     height: 100vh;
 }
 .final-game-message {
     text-align: center;
     margin-top: 30px;
+    font-size: 40px;
+}
+.pet-img > .pet {
+    margin-top: 20%;
 }
 .win {
     background-image: url("https://images.unsplash.com/photo-1464692805480-a69dfaafdb0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
