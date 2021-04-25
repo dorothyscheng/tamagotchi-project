@@ -586,12 +586,6 @@ body {
 .hide {
     opacity: 0;
 }
-/* .urgent {
-    background-color: #FF6600;
-}
-.final {
-    background-color:#ff0000;
-} */
 .purchased {
     opacity: .5;
     cursor: default;
@@ -607,7 +601,7 @@ body {
     justify-content: center;
     flex-direction: column;
 }
-.main-maze {
+.maze-section {
     display: none;
 }
 .maze-intro {
@@ -661,14 +655,14 @@ body {
     align-items: center;
     background-color: #000;
 }
-.maze-number {
+/* .maze-number {
     border: 1px solid white;
     width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 /* .path {
     background-color: #39ff14;
     opacity: .5;
@@ -699,7 +693,6 @@ body {
     background-color: turquoise;
 }
 .goal {
-    /* background-color: turquoise; */
     animation: end 5s infinite;
     text-align: center;
     width: 100px;
@@ -708,7 +701,6 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    /* font-size: 500px; */
 }
 @keyframes end {
     0% {

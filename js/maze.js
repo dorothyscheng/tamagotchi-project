@@ -76,6 +76,12 @@ function invalidMove() {
     sound.pause();
     sound.currentTime=0;
     sound.play();
+    if (player.timeRemaining>6) {
+        player.timeRemaining-=5;
+    } else {
+        player.timeRemaining--;
+    }
+
 }
 function endMaze(x) {
     clearInterval(player.mazeInterval);
@@ -102,26 +108,34 @@ function movePlayer() {
 };
 function startMaze() {
     movePlayer();
-    let timeRemaining=60+player.coins;
-    $('#timer-count').text(timeRemaining);
+    player.timeRemaining=20+player.coins;
+    $('#timer-count').text(player.timeRemaining);
     setTimeout(()=>$('#end-img').fadeOut(),3000);
+    // document.getElementById('countdown').play();
     setTimeout(()=>{
-        $('#main').fadeIn();
+        $('#maze-section').fadeIn();
         $('#maze-timer').addClass('reveal');
         $(document).on('keydown',move);
+        const alert=document.getElementById('alert');
         player.mazeInterval=setInterval(()=>{
-            if (timeRemaining>10) {
-                timeRemaining--;
-            } else if (timeRemaining>5) {
-                timeRemaining--;
+            if (player.timeRemaining>10) {
+                player.timeRemaining--;
+            } else if (player.timeRemaining>5) {
+                player.timeRemaining--;
+                alert.pause();
+                alert.currentTime=0;
+                alert.play();
                 $('#maze-timer').addClass('urgent');
-            } else if (timeRemaining>0) {
-                timeRemaining--;
+            } else if (player.timeRemaining>0) {
+                player.timeRemaining--;
+                alert.pause();
+                alert.currentTime=0;
+                alert.play();
                 $('#maze-timer').addClass('final');
             } else {
                 endMaze(0);
             }
-            $('#timer-count').text(timeRemaining);
+            $('#timer-count').text(player.timeRemaining);
         },1000)
     },4000);
 };
