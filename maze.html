@@ -23,10 +23,17 @@
     <title>Tamagotchi Maze</title>
     <!-- Audio -->
     <audio id="not-active" src="./sounds/mixkit-electronic-retro-block-hit-2185.wav"></audio>
+    <audio id="game-over" src="./sounds/mixkit-retro-arcade-game-over-470.wav"></audio>
+    <audio id="final-win" src="./sounds/mixkit-bonus-extra-in-a-video-game-2064.wav"></audio>
 </head>
 <body>
     <header class="maze-header">
-        <h1 id="maze-title" class="maze-title">I think this is the way out! Can you help me get there?</h1>
+        <section id="maze-intro" class="maze-intro">
+            <h1 id="maze-title" class="maze-title">I think I found the way out, but we don't have much time. I bribed the guard to give us some extra time with the coins you earned.</h1>
+            <div id="maze-timer" class="maze-timer">
+                <h2 id="timer-title" class="timer-title">Time Remaining: <span id="timer-count" class="timer-count"></span></h2>
+            </div>
+        </section>
         <div id="end-img" class="goal end"><i class="fas fa-sun"></i></div>
     </header>
     <main id="main" class="main-maze">
@@ -93,7 +100,7 @@
                 <div class="maze-number">C</div>
                 <div id="c1" class="maze-cell bottom"></div>
                 <div id="c2" class="maze-cell top bottom"></div>
-                <div id="c3" class="maze-cell left top"></div>
+                <div id="c3" class="maze-cell left right top"></div>
                 <div id="c4" class="maze-cell bottom path"></div>
                 <div id="c5" class="maze-cell top bottom"></div>
                 <div id="c6" class="maze-cell bottom top"></div>

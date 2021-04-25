@@ -495,6 +495,7 @@ function playHangman() {
         $('#game-message').text(`${Tamagotchi.player.name} isn't bored!`);
         document.getElementById('not-active').play();
         updateGameMessage();
+        toggleHangman();
     }
 };
 // GAME CREATION FUNCTIONS
@@ -617,6 +618,7 @@ function winCondition() {
     $('#insert-name').text(`${Tamagotchi.player.name}`);
     setTimeout(()=>{
         $('#win-instructions-content').css('display','flex');
+        document.getElementById('pet-message-sound').play();
     }, 1000);
     $('#no').on('click',()=>{
         $('#shop-section').fadeOut();
@@ -658,7 +660,7 @@ function endGame(x) {
     } else {
         localStorage.setItem('finalPet',JSON.stringify(Tamagotchi.player));
         $('body').removeClass('animate-color');
-        document.getElementById('final-win').play();
+        document.getElementById('timer-sound').play();
         $('#end-message').text(`It's time to help ${Tamagotchi.player.name} escape!`);
         setTimeout(()=>{
             $('#end-button').text('I\'m ready!');

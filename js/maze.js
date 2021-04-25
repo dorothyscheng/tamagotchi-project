@@ -1,4 +1,5 @@
 const colors=['#000000','#ffffff','#808080','#f5f5dc','#ffa500','#ff0000','#0066ff','#ffff00','#00ffff','#ff0066','#0D2B73','#D4D7DE','#24781B'];
+const player=JSON.parse(localStorage.getItem('finalPet'));
 function move(e) {
     const $target=$('.target');
     const alpha="abcdefghijklmnopqrst";
@@ -64,7 +65,7 @@ function move(e) {
         $(`#${nextId}`).addClass('target');
         movePlayer();
         if ($(`#${nextId}`).hasClass('end')) {
-            winMaze();
+            endMaze(1);
         }
     } else {
         invalidMove();
@@ -75,14 +76,19 @@ function invalidMove() {
     sound.pause();
     sound.currentTime=0;
     sound.play();
-    // document.getElementById('not-active').play();
 }
-function winMaze() {
-    console.log('you won!');
+function endMaze(x) {
+    clearInterval(player.mazeInterval);
     $(document).off('keydown',move);
+    if (x===0) {
+        document.getElementById('game-over').play();
+        console.log('you lose');
+    } else {
+        document.getElementById('final-win').play();
+        console.log('you won!');
+    }
 }
 function movePlayer() {
-    const player=JSON.parse(localStorage.getItem('finalPet'));
     $('.target').append('<i id="player" class="fas fa-cat"></i>');
     if (player.bodyColorIndex!==0) {
         $('#player').css('color',colors[player.bodyColorIndex]);
@@ -95,12 +101,28 @@ function movePlayer() {
     };
 };
 function startMaze() {
-    const player=JSON.parse(localStorage.getItem('finalPet'));
     movePlayer();
+    let timeRemaining=60+player.coins;
+    $('#timer-count').text(timeRemaining);
     setTimeout(()=>$('#end-img').fadeOut(),3000);
     setTimeout(()=>{
         $('#main').fadeIn();
+        $('#maze-timer').addClass('reveal');
         $(document).on('keydown',move);
+        player.mazeInterval=setInterval(()=>{
+            if (timeRemaining>10) {
+                timeRemaining--;
+            } else if (timeRemaining>5) {
+                timeRemaining--;
+                $('#maze-timer').addClass('urgent');
+            } else if (timeRemaining>0) {
+                timeRemaining--;
+                $('#maze-timer').addClass('final');
+            } else {
+                endMaze(0);
+            }
+            $('#timer-count').text(timeRemaining);
+        },1000)
     },4000);
 };
 startMaze();
