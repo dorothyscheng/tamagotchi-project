@@ -38,7 +38,7 @@ class Tamagotchi {
         'https://images.unsplash.com/photo-1611520474289-264fb8b502a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1916&q=80',
         'https://images.unsplash.com/photo-1611163647499-a2befbd8d25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80'
     ];
-    static words=['whale','kitten','giraffe','monkey','penguin','buffalo','crane','stork','lion','tiger','bear','gorilla','dolphin','sheep','deer','elephant','bee','turtle','dog','spider','cricket','eagle','frog','iguana','crab','kangaroo','marmot','moose','moth','shark'];
+    static words=['whale','kitten','giraffe','monkey','penguin','buffalo','crane','stork','lion','tiger','bear','gorilla','dolphin','sheep','deer','elephant','bee','turtle','dog','spider','cricket','eagle','frog','iguana','crab','kangaroo','marmot','moose','moth','shark','badger','hummingbird','hyena','beetle','cobra','jackal','ladybug','toucan','jellyfish','lizard','owl'];
     static bodyColorIndex=0;
     static footColorIndex=2;
     static tailColorIndex=1;
