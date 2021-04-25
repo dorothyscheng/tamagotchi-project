@@ -2,7 +2,7 @@ class Tamagotchi {
     constructor(name,faveFood,body,foot,tail,background) {
         this.name=name;
         this.age=1;
-        this.coins=30;
+        this.coins=0;
         this.hunger=5;
         this.sleepiness=4;
         this.boredom=6;
@@ -17,9 +17,9 @@ class Tamagotchi {
         this.footColorIndex=foot;
         this.tailColorIndex=tail;
         this.backgroundIndex=background;
-        this.bed=true;
-        this.feeder=true;
-        this.toy=true;
+        this.bed=false;
+        this.feeder=false;
+        this.toy=false;
         this.hangman=false;
         this.finalWinCheck=false;
         this.finalWinCounter=0;
