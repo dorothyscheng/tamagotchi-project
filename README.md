@@ -2,6 +2,7 @@
 
 ## Objective
 To create a working Tamagotchi-inspired game with an animated pet.
+**[Click here to play the game](https://pages.git.generalassemb.ly/dcheng/tamagotchi/)**
 
 ## Technologies Used
 * HTML
