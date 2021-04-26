@@ -768,6 +768,7 @@ function deleteSinglePet(e) {
     const $selected=$(e.target);
     const selectedIndex=parseInt($selected.attr('id').slice(5));
     const savedPets=JSON.parse(localStorage.getItem('savedPets'));
+    savedPets.sort((x,y)=>x.age-y.age);
     let newSavedPets=[];
     savedPets.forEach((element,index)=>{
         if (index!==selectedIndex) {
